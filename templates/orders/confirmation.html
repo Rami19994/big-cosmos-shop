@@ -1,0 +1,1 @@
+{% extends 'base.html' %}{% load i18n %}{% block content %}<section class="success"><h1>{% trans 'Order confirmed' %}</h1><p>{% trans 'Thank you. Your order number is' %} <b>{{ order.order_number }}</b>.</p><a class="btn" href="{{ order.get_absolute_url }}">{% trans 'View order' %}</a></section>{% endblock %}

@@ -1,0 +1,3 @@
+{% extends 'products/list.html' %}{% load i18n %}
+{% block title %}{{ category.name }} · {{ block.super }}{% endblock %}
+{% block content %}<section class="page-hero"><h1>{{ category.name }}</h1><p>{{ category.description }}</p></section>{{ block.super }}{% endblock %}

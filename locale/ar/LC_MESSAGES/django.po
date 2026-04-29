@@ -1,0 +1,865 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Nova Commerce\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-29 22:55+0300\n"
+"Language: ar\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+
+#: .\accounts\models.py:30
+msgid "Shipping"
+msgstr "ابدأ التسوق"
+
+#: .\accounts\models.py:31
+msgid "Billing"
+msgstr ""
+
+#: .\accounts\models.py:32
+msgid "Shipping and billing"
+msgstr ""
+
+#: .\accounts\models.py:35
+msgid "Home"
+msgstr ""
+
+#: .\categories\models.py:15
+msgid "CSS icon class or emoji fallback"
+msgstr ""
+
+#: .\core\models.py:26
+msgid "Store setting"
+msgstr "الإعدادات"
+
+#: .\core\models.py:27
+msgid "Store settings"
+msgstr "الإعدادات"
+
+#: .\coupons\models.py:10
+msgid "Percentage"
+msgstr ""
+
+#: .\coupons\models.py:11
+msgid "Fixed amount"
+msgstr ""
+
+#: .\coupons\models.py:19
+msgid "0 means unlimited"
+msgstr ""
+
+#: .\orders\models.py:25
+msgid "Delivery"
+msgstr ""
+
+#: .\orders\models.py:26
+msgid "Local delivery"
+msgstr ""
+
+#: .\orders\models.py:27
+msgid "Pickup from store"
+msgstr ""
+
+#: .\orders\models.py:42
+msgid "Pending"
+msgstr ""
+
+#: .\orders\models.py:43
+msgid "Processing"
+msgstr ""
+
+#: .\orders\models.py:44
+msgid "Shipped"
+msgstr ""
+
+#: .\orders\models.py:45
+msgid "Delivered"
+msgstr ""
+
+#: .\orders\models.py:46
+msgid "Cancelled"
+msgstr ""
+
+#: .\orders\models.py:47 .\orders\models.py:53
+msgid "Refunded"
+msgstr ""
+
+#: .\orders\models.py:50
+msgid "Unpaid"
+msgstr ""
+
+#: .\orders\models.py:51
+msgid "Paid"
+msgstr ""
+
+#: .\orders\models.py:52
+msgid "Failed"
+msgstr ""
+
+#: .\products\models.py:28
+msgid "In stock"
+msgstr ""
+
+#: .\products\models.py:29
+msgid "Out of stock"
+msgstr ""
+
+#: .\products\models.py:30
+msgid "Pre-order"
+msgstr ""
+
+#: .\products\models.py:48
+msgid "Comma-separated tags"
+msgstr ""
+
+#: .\products\models.py:178
+msgid "Stock in"
+msgstr ""
+
+#: .\products\models.py:179
+msgid "Stock out"
+msgstr ""
+
+#: .\products\models.py:180
+msgid "Manual adjustment"
+msgstr ""
+
+#: .\templates\accounts\addresses.html:1 .\templates\accounts\profile.html:1
+msgid "Profile"
+msgstr "الملف الشخصي"
+
+#: .\templates\accounts\addresses.html:1 .\templates\accounts\profile.html:1
+#: .\templates\admin\dashboard.html:1
+msgid "Orders"
+msgstr "الطلبات"
+
+#: .\templates\accounts\addresses.html:1
+msgid "Address book"
+msgstr "العناوين"
+
+#: .\templates\accounts\addresses.html:1
+msgid "Add address"
+msgstr "العناوين"
+
+#: .\templates\accounts\addresses.html:1
+msgid "Delete"
+msgstr ""
+
+#: .\templates\accounts\login.html:1
+msgid "Welcome back"
+msgstr ""
+
+#: .\templates\accounts\login.html:1
+#: .\templates\accounts\password_reset_complete.html:1 .\templates\base.html:23
+msgid "Login"
+msgstr "تسجيل الدخول"
+
+#: .\templates\accounts\login.html:1
+msgid "Forgot password?"
+msgstr ""
+
+#: .\templates\accounts\login.html:1
+msgid "Register as a seller"
+msgstr ""
+
+#: .\templates\accounts\password_reset.html:1
+msgid "Reset password"
+msgstr ""
+
+#: .\templates\accounts\password_reset.html:1
+msgid "Send reset link"
+msgstr ""
+
+#: .\templates\accounts\password_reset_complete.html:1
+msgid "Password updated"
+msgstr ""
+
+#: .\templates\accounts\password_reset_confirm.html:1
+msgid "Choose a new password"
+msgstr ""
+
+#: .\templates\accounts\password_reset_confirm.html:1
+msgid "Update password"
+msgstr ""
+
+#: .\templates\accounts\password_reset_done.html:1
+msgid "Check your email"
+msgstr ""
+
+#: .\templates\accounts\password_reset_done.html:1
+msgid "If the email exists, a reset link has been sent."
+msgstr ""
+
+#: .\templates\accounts\profile.html:1
+msgid "Addresses"
+msgstr "العناوين"
+
+#: .\templates\accounts\profile.html:1 .\templates\accounts\wishlist.html:1
+msgid "Wishlist"
+msgstr "المفضلة"
+
+#: .\templates\accounts\profile.html:1 .\templates\admin\dashboard.html:1
+msgid "Settings"
+msgstr "الإعدادات"
+
+#: .\templates\accounts\profile.html:1
+msgid "My profile"
+msgstr "الملف الشخصي"
+
+#: .\templates\accounts\profile.html:1
+msgid "Save changes"
+msgstr ""
+
+#: .\templates\accounts\register.html:1
+msgid "Account Registration"
+msgstr ""
+
+#: .\templates\accounts\register.html:1
+msgid "Regular customers can order products without registering an account."
+msgstr ""
+
+#: .\templates\accounts\register.html:1
+msgid "If you are a seller and want to register an account, please contact us."
+msgstr ""
+
+#: .\templates\accounts\settings.html:1
+msgid "Saved preferences"
+msgstr ""
+
+#: .\templates\accounts\settings.html:1
+msgid "Save"
+msgstr ""
+
+#: .\templates\accounts\wishlist.html:1
+msgid "No favorites yet."
+msgstr ""
+
+#: .\templates\admin\customers.html:1 .\templates\admin\dashboard.html:1
+#: .\templates\admin\inventory.html:1 .\templates\admin\management.html:1
+#: .\templates\admin\orders.html:1 .\templates\admin\reports.html:1
+#: .\templates\admin\settings.html:1
+msgid "Overview"
+msgstr ""
+
+#: .\templates\admin\customers.html:1
+msgid "Customer management"
+msgstr ""
+
+#: .\templates\admin\dashboard.html:1
+msgid "Products"
+msgstr "المنتجات"
+
+#: .\templates\admin\dashboard.html:1
+msgid "Customers"
+msgstr "العملاء"
+
+#: .\templates\admin\dashboard.html:1 .\templates\admin\inventory.html:1
+msgid "Inventory"
+msgstr "المخزون"
+
+#: .\templates\admin\dashboard.html:1 .\templates\admin\reports.html:1
+msgid "Reports"
+msgstr "التقارير"
+
+#: .\templates\admin\dashboard.html:1
+msgid "Management dashboard"
+msgstr "لوحة الإدارة"
+
+#: .\templates\admin\dashboard.html:1
+msgid "Sales"
+msgstr ""
+
+#: .\templates\admin\dashboard.html:1
+msgid "Revenue chart"
+msgstr ""
+
+#: .\templates\admin\dashboard.html:1
+msgid "Recent orders"
+msgstr ""
+
+#: .\templates\admin\dashboard.html:1
+msgid "Low stock alerts"
+msgstr ""
+
+#: .\templates\admin\inventory.html:1
+msgid "Low stock"
+msgstr ""
+
+#: .\templates\admin\management.html:1
+msgid "Add product"
+msgstr "المنتجات المميزة"
+
+#: .\templates\admin\orders.html:1
+msgid "Export orders"
+msgstr ""
+
+#: .\templates\admin\orders.html:1
+msgid "Order management"
+msgstr ""
+
+#: .\templates\admin\orders.html:1 .\templates\orders\detail.html:1
+#: .\templates\orders\history.html:1
+msgid "Order"
+msgstr "الطلبات"
+
+#: .\templates\admin\orders.html:1
+msgid "Customer"
+msgstr "العملاء"
+
+#: .\templates\admin\orders.html:1 .\templates\orders\history.html:1
+msgid "Status"
+msgstr ""
+
+#: .\templates\admin\orders.html:1 .\templates\cart\detail.html:1
+#: .\templates\checkout\checkout.html:1 .\templates\orders\detail.html:1
+#: .\templates\orders\history.html:1
+msgid "Total"
+msgstr "الإجمالي"
+
+#: .\templates\admin\orders.html:1
+msgid "Actions"
+msgstr ""
+
+#: .\templates\admin\orders.html:1
+msgid "Print invoice"
+msgstr ""
+
+#: .\templates\admin\reports.html:1
+msgid "Export CSV"
+msgstr ""
+
+#: .\templates\admin\settings.html:1
+msgid "Edit settings"
+msgstr "الإعدادات"
+
+#: .\templates\admin\settings.html:1
+msgid "Website settings"
+msgstr ""
+
+#: .\templates\admin\settings.html:1
+msgid ""
+"Manage logo, favicon, homepage content, currency, tax, and localized copy "
+"from Django admin."
+msgstr ""
+
+#: .\templates\base.html:8
+msgid "Premium e-commerce store for modern brands."
+msgstr ""
+
+#: .\templates\base.html:15
+msgid "Free delivery on selected orders"
+msgstr ""
+
+#: .\templates\base.html:15
+msgid "Secure checkout"
+msgstr "دفع آمن"
+
+#: .\templates\base.html:15
+msgid "Real-time order tracking"
+msgstr ""
+
+#: .\templates\base.html:18
+msgid "Search products, brands, categories..."
+msgstr ""
+
+#: .\templates\base.html:18 .\templates\products\list.html:6
+msgid "Search"
+msgstr "بحث"
+
+#: .\templates\base.html:20 .\templates\products\list.html:2
+msgid "Shop"
+msgstr "تسوق"
+
+#: .\templates\base.html:21
+msgid "Blog"
+msgstr "المدونة"
+
+#: .\templates\base.html:22
+msgid "Contact"
+msgstr "تواصل معنا"
+
+#: .\templates\base.html:23
+msgid "Account"
+msgstr "الحساب"
+
+#: .\templates\base.html:24
+msgid "Cart"
+msgstr "السلة"
+
+#: .\templates\base.html:27
+msgid "Theme"
+msgstr ""
+
+#: .\templates\base.html:32
+msgid "Commerce platform for ambitious retailers."
+msgstr ""
+
+#: .\templates\base.html:34
+msgid "About"
+msgstr "من نحن"
+
+#: .\templates\base.html:34
+msgid "FAQ"
+msgstr ""
+
+#: .\templates\base.html:34
+msgid "Terms"
+msgstr ""
+
+#: .\templates\base.html:34
+msgid "Privacy"
+msgstr ""
+
+#: .\templates\base.html:35
+msgid "Live chat coming soon"
+msgstr ""
+
+#: .\templates\blog\list.html:1
+msgid "Commerce blog"
+msgstr ""
+
+#: .\templates\blog\list.html:1
+msgid "SEO content, buying guides, and store updates."
+msgstr ""
+
+#: .\templates\blog\list.html:1
+msgid "No posts yet."
+msgstr ""
+
+#: .\templates\cart\detail.html:1
+msgid "Shopping cart"
+msgstr ""
+
+#: .\templates\cart\detail.html:1
+msgid "Update"
+msgstr ""
+
+#: .\templates\cart\detail.html:1
+msgid "Remove"
+msgstr ""
+
+#: .\templates\cart\detail.html:1
+msgid "Your cart is empty."
+msgstr ""
+
+#: .\templates\cart\detail.html:1
+msgid "Summary"
+msgstr ""
+
+#: .\templates\cart\detail.html:1 .\templates\checkout\checkout.html:1
+msgid "Subtotal"
+msgstr "المجموع الفرعي"
+
+#: .\templates\cart\detail.html:1 .\templates\checkout\checkout.html:1
+msgid "Discount"
+msgstr "الخصم"
+
+#: .\templates\cart\detail.html:1
+msgid "Coupon code"
+msgstr ""
+
+#: .\templates\cart\detail.html:1
+msgid "Apply"
+msgstr ""
+
+#: .\templates\cart\detail.html:1 .\templates\checkout\checkout.html:1
+msgid "Checkout"
+msgstr "الدفع"
+
+#: .\templates\checkout\checkout.html:1
+msgid "Secure, clear, and optimized for conversion."
+msgstr ""
+
+#: .\templates\checkout\checkout.html:1
+msgid "Share Location for Delivery"
+msgstr ""
+
+#: .\templates\checkout\checkout.html:1
+msgid "Place order"
+msgstr ""
+
+#: .\templates\checkout\checkout.html:1
+msgid "Order summary"
+msgstr "سجل الطلبات"
+
+#: .\templates\checkout\checkout.html:6
+msgid "Geolocation is not supported by your browser"
+msgstr ""
+
+#: .\templates\checkout\checkout.html:9
+msgid "Locating..."
+msgstr ""
+
+#: .\templates\checkout\checkout.html:13
+msgid "Location shared successfully ✓"
+msgstr ""
+
+#: .\templates\checkout\checkout.html:16
+msgid "Unable to retrieve your location"
+msgstr ""
+
+#: .\templates\home.html:4
+msgid "Premium commerce"
+msgstr ""
+
+#: .\templates\home.html:4
+msgid "Products built for the way you live"
+msgstr ""
+
+#: .\templates\home.html:4
+msgid "Start shopping"
+msgstr "ابدأ التسوق"
+
+#: .\templates\home.html:4
+msgid "Our story"
+msgstr "سجل الطلبات"
+
+#: .\templates\home.html:5
+msgid "Flash offers"
+msgstr ""
+
+#: .\templates\home.html:5
+msgid "Curated deals updated daily"
+msgstr ""
+
+#: .\templates\home.html:7
+msgid "Featured categories"
+msgstr "الأقسام المميزة"
+
+#: .\templates\home.html:7
+msgid "View all"
+msgstr ""
+
+#: .\templates\home.html:7
+msgid "Add featured categories in the admin dashboard."
+msgstr ""
+
+#: .\templates\home.html:8
+msgid "Featured products"
+msgstr "المنتجات المميزة"
+
+#: .\templates\home.html:8
+msgid "Add featured products to populate this section."
+msgstr ""
+
+#: .\templates\home.html:9
+msgid "Best sellers"
+msgstr ""
+
+#: .\templates\home.html:9
+msgid "Products customers love most."
+msgstr ""
+
+#: .\templates\home.html:10
+msgid "New arrivals"
+msgstr "وصل حديثا"
+
+#: .\templates\home.html:11
+msgid "Join the insider list"
+msgstr ""
+
+#: .\templates\home.html:11
+msgid "Get offers, launch notes, and shopping inspiration."
+msgstr ""
+
+#: .\templates\home.html:11
+msgid "Subscribe"
+msgstr ""
+
+#: .\templates\includes\product_card.html:5
+msgid "New"
+msgstr ""
+
+#: .\templates\includes\product_card.html:5
+msgid "Hot"
+msgstr ""
+
+#: .\templates\includes\product_card.html:12 .\templates\products\detail.html:8
+msgid "Add to cart"
+msgstr "أضف إلى السلة"
+
+#: .\templates\orders\confirmation.html:1
+msgid "Order confirmed"
+msgstr "تم تأكيد الطلب"
+
+#: .\templates\orders\confirmation.html:1
+msgid "Thank you. Your order number is"
+msgstr ""
+
+#: .\templates\orders\confirmation.html:1
+msgid "View order"
+msgstr ""
+
+#: .\templates\orders\detail.html:1
+msgid "Product"
+msgstr "المنتجات"
+
+#: .\templates\orders\detail.html:1
+msgid "Qty"
+msgstr ""
+
+#: .\templates\orders\detail.html:1
+msgid "Grand total"
+msgstr ""
+
+#: .\templates\orders\detail.html:1
+msgid "Cancel order"
+msgstr ""
+
+#: .\templates\orders\detail.html:1
+msgid "Customer Location"
+msgstr "العملاء"
+
+#: .\templates\orders\history.html:1
+msgid "Order history"
+msgstr "سجل الطلبات"
+
+#: .\templates\orders\history.html:1
+msgid "Date"
+msgstr ""
+
+#: .\templates\pages\about.html:5
+msgid "about us"
+msgstr "من نحن"
+
+#: .\templates\pages\about.html:8
+msgid "we are help you to find good product for you"
+msgstr "نحن نساعدك في العثور على منتج جيد لك"
+
+#: .\templates\pages\about.html:14
+msgid ""
+"Welcome to Cosmos Commerce! We are a dedicated team of passionate developers "
+"and e-commerce experts working hard to bring you the best online shopping "
+"experience. Our mission is to connect buyers with high-quality products "
+"through a seamless, fast, and secure platform."
+msgstr ""
+"مرحباً بكم في كوزموس كوميرس! نحن فريق مخصص من المطورين الشغوفين وخبراء التجارة "
+"الإلكترونية نعمل بجد لنقدم لكم أفضل تجربة تسوق عبر الإنترنت. مهمتنا هي ربط "
+"المشترين بمنتجات عالية الجودة من خلال منصة سلسة وسريعة وآمنة."
+
+#: .\templates\pages\about.html:17
+msgid ""
+"We believe that shopping should be easy, accessible, and enjoyable. That is "
+"why we built Cosmos Commerce with modern technologies to ensure lightning-"
+"fast performance, real-time tracking, and an intuitive user interface."
+msgstr ""
+"نحن نؤمن بأن التسوق يجب أن يكون سهلاً وفي المتناول وممتعاً. لذلك قمنا ببناء "
+"كوزموس كوميرس باستخدام تقنيات حديثة لضمان أداء فائق السرعة وتتبع في الوقت "
+"الفعلي وواجهة مستخدم بديهية."
+
+#: .\templates\pages\about.html:20
+msgid ""
+"Thank you for choosing Cosmos Commerce. We are constantly improving and "
+"working on this website to serve you better every single day!"
+msgstr ""
+"شكراً لاختياركم كوزموس كوميرس. نحن نعمل باستمرار على تحسين وتطوير هذا الموقع "
+"لخدمتكم بشكل أفضل كل يوم!"
+
+#: .\templates\pages\contact.html:1
+msgid "Contact support"
+msgstr "تواصل مع الدعم"
+
+#: .\templates\pages\contact.html:1
+msgid "We are ready to help with products, orders, and partnerships."
+msgstr ""
+
+#: .\templates\pages\contact.html:1
+msgid "Send message"
+msgstr ""
+
+#: .\templates\pages\faq.html:5
+msgid "Frequently asked questions"
+msgstr "أسئلة متكررة"
+
+#: .\templates\pages\faq.html:8
+msgid "Common questions about shopping, orders, and account management."
+msgstr "أسئلة شائعة حول التسوق، الطلبات، وإدارة الحساب."
+
+#: .\templates\pages\faq.html:13
+msgid "Do I need an account to place an order?"
+msgstr "هل أحتاج إلى حساب لتقديم طلب؟"
+
+#: .\templates\pages\faq.html:14
+msgid ""
+"No, you can shop and place orders as a guest without creating an account."
+msgstr "لا، يمكنك التسوق وتقديم الطلبات كضيف دون إنشاء حساب."
+
+#: .\templates\pages\faq.html:17
+msgid "How do I become a seller?"
+msgstr "كيف أصبح بائعًا؟"
+
+#: .\templates\pages\faq.html:18
+msgid ""
+"If you wish to sell your products on our platform, please contact us via the "
+"Contact page to request a seller account. Our team will review your request."
+msgstr ""
+"إذا كنت ترغب في بيع منتجاتك على منصتنا، يرجى الاتصال بنا عبر صفحة اتصل بنا "
+"لطلب حساب بائع. سيقوم فريقنا بمراجعة طلبك."
+
+#: .\templates\pages\faq.html:21
+msgid "How long does shipping take?"
+msgstr "كم من الوقت يستغرق الشحن؟"
+
+#: .\templates\pages\faq.html:22
+msgid ""
+"Delivery times vary based on your location and the shipping method chosen "
+"during checkout. You will see an estimated delivery time before you complete "
+"your order."
+msgstr ""
+"تختلف أوقات التوصيل بناءً على موقعك وطريقة الشحن المختارة أثناء الدفع. سترى "
+"وقت التوصيل المقدر قبل إكمال طلبك."
+
+#: .\templates\pages\faq.html:25
+msgid "Can I track my order?"
+msgstr "هل يمكنني تتبع طلبي؟"
+
+#: .\templates\pages\faq.html:26
+msgid ""
+"Yes! Once your order is dispatched, you will receive a confirmation email "
+"with your order number and tracking details."
+msgstr ""
+"نعم! بمجرد إرسال طلبك، ستتلقى بريدًا إلكترونيًا لتأكيد الطلب يحتوي على رقم "
+"طلبك وتفاصيل التتبع."
+
+#: .\templates\pages\faq.html:29
+msgid "What payment methods do you accept?"
+msgstr "ما هي طرق الدفع التي تقبلونها؟"
+
+#: .\templates\pages\faq.html:30
+msgid ""
+"We accept all major credit cards, debit cards, and secure online payment "
+"methods."
+msgstr ""
+"نحن نقبل جميع بطاقات الائتمان والخصم الرئيسية وطرق الدفع عبر الإنترنت الآمنة."
+
+#: .\templates\pages\faq.html:33
+msgid "How can I return an item?"
+msgstr "كيف يمكنني إرجاع عنصر؟"
+
+#: .\templates\pages\faq.html:34
+msgid ""
+"If you are not satisfied with your purchase, you can contact our support "
+"team within 14 days of receiving your item to initiate a return."
+msgstr ""
+"إذا لم تكن راضيًا عن عملية الشراء، يمكنك الاتصال بفريق الدعم لدينا في غضون 14 "
+"يومًا من استلام العنصر الخاص بك لبدء عملية الإرجاع."
+
+#: .\templates\products\compare.html:1
+msgid "Product comparison"
+msgstr "مقارنة المنتجات"
+
+#: .\templates\products\compare.html:1
+msgid "Add products to compare."
+msgstr "مقارنة المنتجات"
+
+#: .\templates\products\detail.html:7
+msgid "SKU"
+msgstr ""
+
+#: .\templates\products\detail.html:7
+msgid "Stock"
+msgstr ""
+
+#: .\templates\products\detail.html:9
+msgid "Favorite"
+msgstr ""
+
+#: .\templates\products\detail.html:9
+msgid "Compare"
+msgstr ""
+
+#: .\templates\products\detail.html:12
+msgid "Details"
+msgstr ""
+
+#: .\templates\products\detail.html:12
+msgid "Watch product video"
+msgstr ""
+
+#: .\templates\products\detail.html:13
+msgid "Questions and reviews"
+msgstr ""
+
+#: .\templates\products\detail.html:13
+msgid "Write a review"
+msgstr ""
+
+#: .\templates\products\detail.html:13
+msgid "Submit review"
+msgstr ""
+
+#: .\templates\products\detail.html:13
+msgid "Ask a question"
+msgstr ""
+
+#: .\templates\products\detail.html:13
+msgid "Ask"
+msgstr ""
+
+#: .\templates\products\detail.html:14
+msgid "Related products"
+msgstr "المنتجات المميزة"
+
+#: .\templates\products\list.html:4
+msgid "Shop the collection"
+msgstr ""
+
+#: .\templates\products\list.html:4
+msgid "Filter by brand, price, rating, availability, and category."
+msgstr ""
+
+#: .\templates\products\list.html:6
+msgid "All categories"
+msgstr "الأقسام المميزة"
+
+#: .\templates\products\list.html:6
+msgid "All brands"
+msgstr ""
+
+#: .\templates\products\list.html:6
+msgid "Min price"
+msgstr ""
+
+#: .\templates\products\list.html:6
+msgid "Max price"
+msgstr ""
+
+#: .\templates\products\list.html:6
+msgid "Newest"
+msgstr ""
+
+#: .\templates\products\list.html:6
+msgid "Price low to high"
+msgstr ""
+
+#: .\templates\products\list.html:6
+msgid "Price high to low"
+msgstr ""
+
+#: .\templates\products\list.html:6
+msgid "Popularity"
+msgstr ""
+
+#: .\templates\products\list.html:6
+msgid "Best rating"
+msgstr "الإعدادات"
+
+#: .\templates\products\list.html:6
+msgid "On sale"
+msgstr ""
+
+#: .\templates\products\list.html:6
+msgid "Apply filters"
+msgstr ""
+
+#: .\templates\products\list.html:7
+msgid "No products found."
+msgstr ""
+
+#: .\templates\products\list.html:7
+msgid "Previous"
+msgstr ""
+
+#: .\templates\products\list.html:7
+msgid "Next"
+msgstr ""

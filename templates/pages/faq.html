@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load i18n %}{% block content %}
+<section class="page-hero">
+    <h1>
+        {% trans 'Frequently asked questions' %}
+    </h1>
+    <p>
+        {% trans 'Common questions about shopping, orders, and account management.' %}
+    </p>
+</section>
+<div class="page-content">
+    <details class="faq-item">
+        <summary>{% trans 'Do I need an account to place an order?' %}</summary>
+        <p>{% trans 'No, you can shop and place orders as a guest without creating an account.' %}</p>
+    </details>
+    <details class="faq-item">
+        <summary>{% trans 'How do I become a seller?' %}</summary>
+        <p>{% trans 'If you wish to sell your products on our platform, please contact us via the Contact page to request a seller account. Our team will review your request.' %}</p>
+    </details>
+    <details class="faq-item">
+        <summary>{% trans 'How long does shipping take?' %}</summary>
+        <p>{% trans 'Delivery times vary based on your location and the shipping method chosen during checkout. You will see an estimated delivery time before you complete your order.' %}</p>
+    </details>
+    <details class="faq-item">
+        <summary>{% trans 'Can I track my order?' %}</summary>
+        <p>{% trans 'Yes! Once your order is dispatched, you will receive a confirmation email with your order number and tracking details.' %}</p>
+    </details>
+    <details class="faq-item">
+        <summary>{% trans 'What payment methods do you accept?' %}</summary>
+        <p>{% trans 'We accept all major credit cards, debit cards, and secure online payment methods.' %}</p>
+    </details>
+    <details class="faq-item">
+        <summary>{% trans 'How can I return an item?' %}</summary>
+        <p>{% trans 'If you are not satisfied with your purchase, you can contact our support team within 14 days of receiving your item to initiate a return.' %}</p>
+    </details>
+    </div>
+{% endblock %}

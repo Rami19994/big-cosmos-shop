@@ -1,0 +1,12 @@
+{% extends 'base.html' %}{% load i18n %}
+{% block content %}
+<section class="hero">
+  <div class="hero-copy"><span class="eyebrow">{% trans 'Premium commerce' %}</span>{% trans 'Products built for the way you live' as fallback_hero %}<h1>{% if is_rtl %}{{ store.homepage_title_ar|default:fallback_hero }}{% else %}{{ store.homepage_title_en|default:fallback_hero }}{% endif %}</h1><p>{% if is_rtl %}{{ store.homepage_subtitle_ar }}{% else %}{{ store.homepage_subtitle_en }}{% endif %}</p><div class="actions"><a class="btn" href="{% url 'products:list' %}">{% trans 'Start shopping' %}</a><a class="btn ghost" href="{% url 'pages:about' %}">{% trans 'Our story' %}</a></div></div>
+  <div class="hero-card"><div class="glass"><b>{% trans 'Flash offers' %}</b><span>{% trans 'Curated deals updated daily' %}</span></div></div>
+</section>
+<section class="section"><div class="section-head"><h2>{% trans 'Featured categories' %}</h2><a href="{% url 'products:list' %}">{% trans 'View all' %}</a></div><div class="category-grid">{% for category in categories %}<a class="category-card" href="{{ category.get_absolute_url }}"><span>{{ category.icon|default:'◆' }}</span><h3>{{ category.name }}</h3><p>{{ category.description|truncatewords:12 }}</p></a>{% empty %}<p>{% trans 'Add featured categories in the admin dashboard.' %}</p>{% endfor %}</div></section>
+<section class="section"><div class="section-head"><h2>{% trans 'Featured products' %}</h2></div><div class="product-grid">{% for product in featured_products %}{% include 'includes/product_card.html' %}{% empty %}<p>{% trans 'Add featured products to populate this section.' %}</p>{% endfor %}</div></section>
+<section class="promo-grid">{% for banner in banners %}<a class="promo" href="{{ banner.link|default:'#' }}"><h3>{{ banner.title }}</h3><p>{{ banner.subtitle }}</p></a>{% endfor %}<div class="promo dark"><h3>{% trans 'Best sellers' %}</h3><p>{% trans 'Products customers love most.' %}</p></div></section>
+<section class="section"><div class="section-head"><h2>{% trans 'New arrivals' %}</h2></div><div class="product-grid compact">{% for product in new_arrivals %}{% include 'includes/product_card.html' %}{% endfor %}</div></section>
+<section class="newsletter"><h2>{% trans 'Join the insider list' %}</h2><p>{% trans 'Get offers, launch notes, and shopping inspiration.' %}</p><form method="post">{% csrf_token %}{{ newsletter_form.email }}<button class="btn">{% trans 'Subscribe' %}</button></form></section>
+{% endblock %}

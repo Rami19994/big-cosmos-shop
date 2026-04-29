@@ -1,0 +1,39 @@
+{% load i18n static %}
+<!doctype html>
+<html lang="{{ LANGUAGE_CODE }}" dir="{% if is_rtl %}rtl{% else %}ltr{% endif %}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{% if store %}{{ store.site_name }}{% else %}Cosmos Commerce{% endif %}{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}{% trans 'Premium e-commerce store for modern brands.' %}{% endblock %}">
+  <meta property="og:title" content="{% block og_title %}{{ store.site_name|default:'Cosmos Commerce' }}{% endblock %}">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="{% static 'css/storefront.css' %}">
+</head>
+<body>
+  <div class="topbar">{% trans 'Free delivery on selected orders' %} · {% trans 'Secure checkout' %} · {% trans 'Real-time order tracking' %}</div>
+  <header class="site-header">
+    <a class="brand" href="{% url 'core:home' %}">{% if store.logo %}<img src="{{ store.logo.url }}" alt="{{ store.site_name }}">{% endif %}<span>{{ store.site_name|default:'Cosmos Commerce' }}</span></a>
+    <form class="search" action="{% url 'products:search' %}"><input name="q" placeholder="{% trans 'Search products, brands, categories...' %}" value="{{ request.GET.q }}"><button>{% trans 'Search' %}</button></form>
+    <nav class="nav">
+      <a href="{% url 'products:list' %}">{% trans 'Shop' %}</a>
+      <a href="{% url 'blog:list' %}">{% trans 'Blog' %}</a>
+      <a href="{% url 'pages:contact' %}">{% trans 'Contact' %}</a>
+      {% if user.is_authenticated %}<a href="{% url 'accounts:profile' %}" style="display:inline-flex; align-items:center; gap:8px;">{% if user.profile.avatar %}<img src="{{ user.profile.avatar.url }}" alt="{{ user.get_username }}" style="width:28px; height:28px; border-radius:50%; object-fit:cover;">{% else %}<div style="width:28px; height:28px; border-radius:50%; background:#007bff; display:flex; align-items:center; justify-content:center; color:#fff; font-size:14px; font-weight:bold;">{{ user.get_username|make_list|first|upper }}</div>{% endif %}<span>{{ user.get_full_name|default:user.get_username }}</span></a><form action="{% url 'accounts:logout' %}" method="post" style="display:inline; margin-inline-start: 10px;">{% csrf_token %}<button type="submit" style="background:none; border:none; color:inherit; cursor:pointer; padding:0; font:inherit; font-size:0.9rem; opacity:0.8;">{% trans 'Logout' %}</button></form>{% else %}<a href="{% url 'accounts:login' %}">{% trans 'Login' %}</a>{% endif %}
+      <a class="cart-link" href="{% url 'cart:detail' %}">{% trans 'Cart' %} <b>{{ cart_count }}</b></a>
+    </nav>
+    <form class="language" action="{% url 'set_language' %}" method="post">{% csrf_token %}<input name="next" type="hidden" value="{{ request.get_full_path }}"><select name="language" onchange="this.form.submit()"><option value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>English</option><option value="ar" {% if LANGUAGE_CODE == 'ar' %}selected{% endif %}>العربية</option></select></form>
+    <button class="theme-toggle" type="button" data-theme-toggle>{% trans 'Theme' %}</button>
+  </header>
+  {% if messages %}<div class="messages">{% for message in messages %}<div class="message {{ message.tags }}">{{ message }}</div>{% endfor %}</div>{% endif %}
+  <main>{% block content %}{% endblock %}</main>
+  <footer class="footer">
+    {% trans 'Commerce platform for ambitious retailers.' as fallback_tagline %}
+    <div><h3>{{ store.site_name|default:'Cosmos Commerce' }}</h3><p>{{ store.tagline|default:fallback_tagline }}</p></div>
+    <div><a href="{% url 'pages:about' %}">{% trans 'About' %}</a><a href="{% url 'pages:faq' %}">{% trans 'FAQ' %}</a><a href="{% url 'pages:page' 'terms' %}">{% trans 'Terms' %}</a><a href="{% url 'pages:page' 'privacy' %}">{% trans 'Privacy' %}</a></div>
+    <div><a class="floating" href="https://wa.me/{{ store.whatsapp|default:'000000000' }}">WhatsApp</a><span>{% trans 'Live chat coming soon' %}</span></div>
+  </footer>
+  <script src="{% static 'js/storefront.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}{% load i18n %}
+{% block title %}{{ product.name }} · {{ block.super }}{% endblock %}
+{% block meta_description %}{{ product.meta_description|default:product.summary }}{% endblock %}
+{% block content %}
+<section class="product-detail">
+  <div class="gallery">{% for image in product.images.all %}<img src="{{ image.image.url }}" alt="{{ image.alt_text }}">{% empty %}<div class="placeholder xl">{{ product.name|slice:':1' }}</div>{% endfor %}</div>
+  <div class="buy-box"><small>{{ product.category.name }} {% if product.brand %}· {{ product.brand.name }}{% endif %}</small><h1>{{ product.name }}</h1><div class="rating">★ {{ product.rating_average|floatformat:1 }}</div><p>{{ product.summary }}</p><div class="price big"><strong>{{ product.current_price }} {{ product.currency }}</strong>{% if product.discount_price %}<del>{{ product.price }}</del><span>-{{ product.discount_percent }}%</span>{% endif %}</div><p class="stock">{% trans 'SKU' %}: {{ product.sku }} · {{ product.get_availability_display }} · {% trans 'Stock' %}: {{ product.stock_quantity }}</p>
+    <form method="post" action="{% url 'cart:add' product.id %}" class="stack">{% csrf_token %}{% if product.variants.exists %}<select name="variant">{% for variant in product.variants.all %}<option value="{{ variant.id }}">{{ variant.name }}: {{ variant.value }} (+{{ variant.price_delta }})</option>{% endfor %}</select>{% endif %}<input type="number" name="quantity" min="1" value="1"><button class="btn full">{% trans 'Add to cart' %}</button></form>
+    <div class="actions split"><form method="post" action="{% url 'products:toggle_wishlist' product.id %}">{% csrf_token %}<button class="btn ghost">{% trans 'Favorite' %}</button></form><a class="btn ghost" href="{% url 'products:compare_add' product.id %}">{% trans 'Compare' %}</a></div>
+  </div>
+</section>
+<section class="section detail-tabs"><h2>{% trans 'Details' %}</h2><p>{{ product.description|linebreaks }}</p>{% if product.video_url %}<a href="{{ product.video_url }}">{% trans 'Watch product video' %}</a>{% endif %}<table>{% for spec in product.specifications.all %}<tr><th>{{ spec.name }}</th><td>{{ spec.value }}</td></tr>{% endfor %}</table></section>
+<section class="section"><h2>{% trans 'Questions and reviews' %}</h2><div class="two-col"><form method="post">{% csrf_token %}<h3>{% trans 'Write a review' %}</h3>{{ review_form.as_p }}<button name="submit_review" class="btn">{% trans 'Submit review' %}</button></form><form method="post">{% csrf_token %}<h3>{% trans 'Ask a question' %}</h3>{{ question_form.as_p }}<button name="submit_question" class="btn">{% trans 'Ask' %}</button></form></div></section>
+<section class="section"><h2>{% trans 'Related products' %}</h2><div class="product-grid compact">{% for product in related %}{% include 'includes/product_card.html' %}{% endfor %}</div></section>
+{% endblock %}

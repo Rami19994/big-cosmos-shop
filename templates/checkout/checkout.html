@@ -1,0 +1,21 @@
+{% extends 'base.html' %}{% load i18n %}{% block content %}<section class="page-hero"><h1>{% trans 'Checkout' %}</h1><p>{% trans 'Secure, clear, and optimized for conversion.' %}</p></section><div class="checkout-layout"><form method="post" class="panel form-grid">{% csrf_token %}{{ form.as_p }}<div style="grid-column: 1 / -1; margin-bottom: 1rem;"><button type="button" class="btn ghost" id="share-location-btn">{% trans 'Share Location for Delivery' %}</button><span id="location-status" style="margin-inline-start: 1rem; font-size: 0.9rem; color: #666;"></span></div><button class="btn full">{% trans 'Place order' %}</button></form><aside class="summary"><h2>{% trans 'Order summary' %}</h2>{% for item in cart.items.all %}<p>{{ item.quantity }} × {{ item.product.name }} <b>{{ item.line_total }}</b></p>{% endfor %}<hr><p>{% trans 'Subtotal' %}: {{ cart.subtotal }}</p><p>{% trans 'Discount' %}: {{ cart.discount_total }}</p><p class="total">{% trans 'Total' %}: {{ cart.total }}</p></aside></div>
+<script>
+document.getElementById('share-location-btn').addEventListener('click', function() {
+    const status = document.getElementById('location-status');
+    if (!navigator.geolocation) {
+        status.textContent = "{% trans 'Geolocation is not supported by your browser' %}";
+        return;
+    }
+    status.textContent = "{% trans 'Locating...' %}";
+    navigator.geolocation.getCurrentPosition(function(position) {
+        document.querySelector('input[name="latitude"]').value = position.coords.latitude;
+        document.querySelector('input[name="longitude"]').value = position.coords.longitude;
+        status.textContent = "{% trans 'Location shared successfully ✓' %}";
+        status.style.color = "green";
+    }, function() {
+        status.textContent = "{% trans 'Unable to retrieve your location' %}";
+        status.style.color = "red";
+    });
+});
+</script>
+{% endblock %}

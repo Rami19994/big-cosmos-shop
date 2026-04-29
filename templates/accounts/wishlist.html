@@ -1,0 +1,1 @@
+{% extends 'base.html' %}{% load i18n %}{% block content %}<section class="page-hero"><h1>{% trans 'Wishlist' %}</h1></section><div class="product-grid">{% for item in items %}{% with product=item.product %}{% include 'includes/product_card.html' %}{% endwith %}{% empty %}<p>{% trans 'No favorites yet.' %}</p>{% endfor %}</div>{% endblock %}

@@ -1,0 +1,1 @@
+{% extends 'base.html' %}{% load i18n %}{% block content %}<section class="page-hero"><h1>{% trans 'Contact support' %}</h1><p>{% trans 'We are ready to help with products, orders, and partnerships.' %}</p></section><form method="post" class="auth-card wide">{% csrf_token %}{{ form.as_p }}<button class="btn full">{% trans 'Send message' %}</button></form>{% endblock %}

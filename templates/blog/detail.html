@@ -1,0 +1,1 @@
+{% extends 'base.html' %}{% block title %}{{ post.title }} · {{ block.super }}{% endblock %}{% block content %}<article class="article"><h1>{{ post.title }}</h1><p class="muted">{{ post.published_at }}</p>{% if post.cover %}<img src="{{ post.cover.url }}" alt="{{ post.title }}">{% endif %}<div>{{ post.body|linebreaks }}</div></article>{% endblock %}

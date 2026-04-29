@@ -1,0 +1,14 @@
+{% load i18n %}
+<article class="product-card">
+  <a class="product-media" href="{{ product.get_absolute_url }}">
+    {% with image=product.images.first %}{% if image %}<img src="{{ image.image.url }}" alt="{{ image.alt_text }}">{% else %}<div class="placeholder">{{ product.name|slice:':1' }}</div>{% endif %}{% endwith %}
+    <div class="badges">{% if product.is_new_arrival %}<span>{% trans 'New' %}</span>{% endif %}{% if product.discount_price %}<span>-{{ product.discount_percent }}%</span>{% endif %}{% if product.is_hot %}<span>{% trans 'Hot' %}</span>{% endif %}</div>
+  </a>
+  <div class="product-body">
+    <small>{{ product.category.name }}</small>
+    <h3><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></h3>
+    <div class="rating">★ {{ product.rating_average|floatformat:1 }}</div>
+    <div class="price"><strong>{{ product.current_price }} {{ product.currency }}</strong>{% if product.discount_price %}<del>{{ product.price }}</del>{% endif %}</div>
+    <form method="post" action="{% url 'cart:add' product.id %}">{% csrf_token %}<input type="hidden" name="next" value="{{ request.get_full_path }}"><button class="btn full">{% trans 'Add to cart' %}</button></form>
+  </div>
+</article>

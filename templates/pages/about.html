@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load i18n %}{% block content %}
+<section class="page-hero">
+    <h1>
+        {% trans 'about us' %}
+    </h1>
+    <p>
+        {% trans 'we are help you to find good product for you' %}
+    </p>
+</section>
+<div class="page-content">
+    <div class="about-section" style="max-width: 800px; margin: 0 auto; line-height: 1.8; font-size: 1.1rem;">
+        <p style="margin-bottom: 1.5rem;">
+            {% trans 'Welcome to Cosmos Commerce! We are a dedicated team of passionate developers and e-commerce experts working hard to bring you the best online shopping experience. Our mission is to connect buyers with high-quality products through a seamless, fast, and secure platform.' %}
+        </p>
+        <p style="margin-bottom: 1.5rem;">
+            {% trans 'We believe that shopping should be easy, accessible, and enjoyable. That is why we built Cosmos Commerce with modern technologies to ensure lightning-fast performance, real-time tracking, and an intuitive user interface.' %}
+        </p>
+        <p>
+            {% trans 'Thank you for choosing Cosmos Commerce. We are constantly improving and working on this website to serve you better every single day!' %}
+        </p>
+    </div>
+</div>
+{% endblock %}
