@@ -7,6 +7,6 @@ pip install -r requirements.txt
 python manage.py collectstatic --noinput
 
 # Run migrations if database is configured
-if [[ $POSTGRES_DB ]]; then
+if [[ $POSTGRES_DATABASE || $POSTGRES_DB ]]; then
   python manage.py migrate --noinput
 fi

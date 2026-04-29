@@ -61,8 +61,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "config.wsgi.application"
 
-if os.environ.get("POSTGRES_DB"):
-    DATABASES = {"default": {"ENGINE": "django.db.backends.postgresql", "NAME": os.environ.get("POSTGRES_DB"), "USER": os.environ.get("POSTGRES_USER"), "PASSWORD": os.environ.get("POSTGRES_PASSWORD"), "HOST": os.environ.get("POSTGRES_HOST", "localhost"), "PORT": os.environ.get("POSTGRES_PORT", "5432")}}
+if os.environ.get("POSTGRES_DATABASE") or os.environ.get("POSTGRES_DB"):
+    db_name = os.environ.get("POSTGRES_DATABASE") or os.environ.get("POSTGRES_DB")
+    DATABASES = {"default": {"ENGINE": "django.db.backends.postgresql", "NAME": db_name, "USER": os.environ.get("POSTGRES_USER"), "PASSWORD": os.environ.get("POSTGRES_PASSWORD"), "HOST": os.environ.get("POSTGRES_HOST", "localhost"), "PORT": os.environ.get("POSTGRES_PORT", "5432")}}
 elif os.environ.get("VERCEL"):
     DATABASES = {"default": {"ENGINE": "django.db.backends.sqlite3", "NAME": os.path.join("/tmp", "db.sqlite3")}}
 else:
