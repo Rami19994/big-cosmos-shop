@@ -105,7 +105,12 @@ class Product(models.Model):
     def low_stock(self):
         return 0 < self.stock_quantity <= self.low_stock_threshold
 
+    @property
+    def images_360(self):
+        return self.images.filter(is_360_view=True)
+
     def get_absolute_url(self):
+
         return reverse("products:detail", kwargs={"slug": self.slug})
 
 
@@ -114,6 +119,7 @@ class ProductImage(models.Model):
     image = models.ImageField(upload_to="products/")
     alt_text = models.CharField(max_length=160, blank=True)
     is_main = models.BooleanField(default=False)
+    is_360_view = models.BooleanField(default=False)
     sort_order = models.PositiveIntegerField(default=0)
 
     class Meta:

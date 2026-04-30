@@ -3,7 +3,102 @@
 {% block meta_description %}{{ product.meta_description|default:product.summary }}{% endblock %}
 {% block content %}
 <section class="product-detail">
-  <div class="gallery">{% for image in product.images.all %}<img src="{{ image.image.url }}" alt="{{ image.alt_text }}">{% empty %}<div class="placeholder xl">{{ product.name|slice:':1' }}</div>{% endfor %}</div>
+  <div class="gallery-wrapper">
+    {% if product.images_360.exists %}
+      <div class="product-360-viewer" id="product-360-viewer" style="position: relative; cursor: grab; background: #fff; border-radius: 12px; overflow: hidden; margin-bottom: 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border: 1px solid #eee;">
+        <div id="viewer-360-container" style="display: flex; justify-content: center; align-items: center; min-height: 450px; user-select: none;">
+          {% for img in product.images_360 %}
+              <img src="{{ img.image.url }}" class="viewer-360-image" style="max-width: 100%; max-height: 450px; object-fit: contain; display: {% if forloop.first %}block{% else %}none{% endif %};" data-index="{{ forloop.counter0 }}" draggable="false">
+            {% endfor %}
+          </div>
+          <div class="viewer-360-badge" style="position: absolute; top: 1rem; right: 1rem; background: var(--brand, #000); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">360° VIEW</div>
+          <div class="viewer-360-controls" style="position: absolute; bottom: 1rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 5px; background: rgba(255,255,255,0.9); padding: 8px 20px; border-radius: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); backdrop-filter: blur(5px);">
+            <div style="display: flex; gap: 15px; align-items: center;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: #666;"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"></path><polyline points="21 3 21 8 16 8"></polyline></svg>
+              <span style="font-size: 0.85rem; color: #444; font-weight: 500;">{% trans 'Drag to rotate product' %}</span>
+            </div>
+          </div>
+        </div>
+
+        <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            const container = document.getElementById('product-360-viewer');
+            const images = container.querySelectorAll('.viewer-360-image');
+            const totalImages = images.length;
+            if (totalImages <= 1) return;
+
+            let currentIndex = 0;
+            let isDragging = false;
+            let startX = 0;
+            const sensitivity = 8; // Pixels per frame change
+
+            function showImage(index) {
+              images.forEach((img, i) => {
+                img.style.display = i === index ? 'block' : 'none';
+              });
+            }
+
+            container.addEventListener('mousedown', (e) => {
+              isDragging = true;
+              startX = e.pageX;
+              container.style.cursor = 'grabbing';
+              e.preventDefault();
+            });
+
+            window.addEventListener('mouseup', () => {
+              isDragging = false;
+              container.style.cursor = 'grab';
+            });
+
+            window.addEventListener('mousemove', (e) => {
+              if (!isDragging) return;
+              const diff = e.pageX - startX;
+              if (Math.abs(diff) > sensitivity) {
+                const step = Math.floor(diff / sensitivity);
+                // Reverse direction for natural rotation feel
+                currentIndex = (currentIndex - step + (totalImages * 100)) % totalImages;
+                showImage(currentIndex);
+                startX = e.pageX;
+              }
+            });
+
+            // Touch support
+            container.addEventListener('touchstart', (e) => {
+              isDragging = true;
+              startX = e.touches[0].pageX;
+            }, {passive: false});
+
+            window.addEventListener('touchend', () => {
+              isDragging = false;
+            });
+
+            window.addEventListener('touchmove', (e) => {
+              if (!isDragging) return;
+              const diff = e.touches[0].pageX - startX;
+              if (Math.abs(diff) > sensitivity) {
+                const step = Math.floor(diff / sensitivity);
+                currentIndex = (currentIndex - step + (totalImages * 100)) % totalImages;
+                showImage(currentIndex);
+                startX = e.touches[0].pageX;
+                e.preventDefault();
+              }
+            }, {passive: false});
+          });
+        </script>
+      {% endif %}
+
+
+    <div class="gallery">
+      {% for image in product.images.all %}
+        {% if not image.is_360_view %}
+          <img src="{{ image.image.url }}" alt="{{ image.alt_text }}">
+        {% endif %}
+      {% empty %}
+        <div class="placeholder xl">{{ product.name|slice:':1' }}</div>
+      {% endfor %}
+    </div>
+  </div>
+
   <div class="buy-box"><small>{{ product.category.name }} {% if product.brand %}· {{ product.brand.name }}{% endif %}</small><h1>{{ product.name }}</h1><div class="rating">★ {{ product.rating_average|floatformat:1 }}</div><p>{{ product.summary }}</p><div class="price big"><strong>{{ product.current_price }} {{ product.currency }}</strong>{% if product.discount_price %}<del>{{ product.price }}</del><span>-{{ product.discount_percent }}%</span>{% endif %}</div><p class="stock">{% trans 'SKU' %}: {{ product.sku }} · {{ product.get_availability_display }} · {% trans 'Stock' %}: {{ product.stock_quantity }}</p>
     <form method="post" action="{% url 'cart:add' product.id %}" class="stack">{% csrf_token %}{% if product.variants.exists %}<select name="variant">{% for variant in product.variants.all %}<option value="{{ variant.id }}">{{ variant.name }}: {{ variant.value }} (+{{ variant.price_delta }})</option>{% endfor %}</select>{% endif %}<input type="number" name="quantity" min="1" value="1"><button class="btn full">{% trans 'Add to cart' %}</button></form>
     <div class="actions split"><form method="post" action="{% url 'products:toggle_wishlist' product.id %}">{% csrf_token %}<button class="btn ghost">{% trans 'Favorite' %}</button></form><a class="btn ghost" href="{% url 'products:compare_add' product.id %}">{% trans 'Compare' %}</a></div>
