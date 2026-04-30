@@ -17,7 +17,7 @@
     <div class="header-top">
       <a class="brand" href="{% url 'core:home' %}">
         {% if store.logo %}
-          <img src="{{ store.logo.url }}" alt="" onerror="this.style.display='none'">
+          <img src="{{ store.logo.url }}" alt="" onerror="this.onerror=null; this.src='{% static 'img/logo.png' %}'">
         {% else %}
           <img src="{% static 'img/logo.png' %}" alt="">
         {% endif %}
