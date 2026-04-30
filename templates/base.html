@@ -16,6 +16,11 @@
   <header class="site-header">
     <div class="header-top">
       <a class="brand" href="{% url 'core:home' %}">
+        {% if store.logo %}
+          <img src="{{ store.logo.url }}" alt="{{ store.site_name }}">
+        {% else %}
+          <img src="{% static 'img/logo.png' %}" alt="{{ store.site_name }}">
+        {% endif %}
         <span>{{ store.site_name|default:'Cosmos Commerce' }}</span>
       </a>
       <button class="mobile-toggle" aria-label="Toggle menu" data-menu-toggle>
