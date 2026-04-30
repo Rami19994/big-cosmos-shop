@@ -47,6 +47,7 @@ class Product(models.Model):
     availability = models.CharField(max_length=20, choices=Availability.choices, default=Availability.IN_STOCK)
     tags = models.CharField(max_length=255, blank=True, help_text=_("Comma-separated tags"))
     video_url = models.URLField(blank=True)
+    video_file = models.FileField(upload_to="products/videos/", blank=True, null=True)
     is_active = models.BooleanField(default=True)
     is_featured = models.BooleanField(default=False)
     is_best_seller = models.BooleanField(default=False)
