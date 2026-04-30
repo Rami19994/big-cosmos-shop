@@ -33,8 +33,7 @@
         <p style="margin: 0; font-size: 0.9rem; opacity: 0.9;">{% trans 'Curated deals updated daily' %}</p>
       </div>
       <a href="{% url 'products:list' %}"
-        style="background: white; color: var(--night); padding: 0.5rem 1rem; border-radius: 999px; font-weight: bold; font-size: 0.8rem;">{%
-        trans 'Explore' %}</a>
+        style="background: white; color: var(--night); padding: 0.5rem 1rem; border-radius: 999px; font-weight: bold; font-size: 0.8rem;">{% trans 'Explore' %}</a>
     </div>
   </div>
 </section>
@@ -122,12 +121,10 @@
   style="text-align: center; background: var(--night); color: white; border-radius: 40px; margin: 2rem 6vw; padding: 5rem 2rem;">
   <span class="eyebrow" style="color: var(--gold);">{% trans 'The Future of Shopping' %}</span>
   <h2 style="font-size: 3rem; margin: 1rem 0;">{% trans 'Immersive 3D Experience' %}</h2>
-  <p style="max-width: 600px; margin: 0 auto 2rem; opacity: 0.8;">{% trans 'Interact with our products like never
-    before. View them in 360°, zoom in on details, and see them in your space with AR.' %}</p>
+  <p style="max-width: 600px; margin: 0 auto 2rem; opacity: 0.8;">{% trans 'Interact with our products like never before. View them in 360°, zoom in on details, and see them in your space with AR.' %}</p>
   <div style="display: flex; gap: 1rem; justify-content: center;">
     <a class="btn" href="{% url 'products:list' %}">{% trans 'Try it now' %}</a>
-    <a class="btn ghost" href="{% url 'pages:about' %}" style="color: white; border-color: rgba(255,255,255,0.3);">{%
-      trans 'Learn more' %}</a>
+    <a class="btn ghost" href="{% url 'pages:about' %}" style="color: white; border-color: rgba(255,255,255,0.3);">{% trans 'Learn more' %}</a>
   </div>
 </section>
 
