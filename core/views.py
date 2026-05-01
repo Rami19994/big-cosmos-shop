@@ -74,6 +74,20 @@ def settings(request):
 
 
 @staff_member_required
+def run_migrations(request):
+    from django.core.management import call_command
+    from django.http import HttpResponse
+    import io
+    
+    output = io.StringIO()
+    try:
+        call_command('migrate', interactive=False, stdout=output)
+        return HttpResponse(f"<h1>Migrations applied successfully</h1><pre>{output.getvalue()}</pre>")
+    except Exception as e:
+        return HttpResponse(f"<h1>Migration failed</h1><pre>{str(e)}</pre>", status=500)
+
+
+@staff_member_required
 def export_orders(request):
     response = HttpResponse(content_type="text/csv")
     response["Content-Disposition"] = 'attachment; filename="orders.csv"'
