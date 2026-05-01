@@ -128,6 +128,7 @@ if USE_SUPABASE:
     AWS_QUERYSTRING_AUTH = False
     
     # Supabase S3 settings
+    AWS_S3_SIGNATURE_VERSION = "s3v4"
     if AWS_S3_ENDPOINT_URL:
         # Extract project ID from endpoint (e.g. https://xyz.supabase.co/storage/v1/s3)
         try:
@@ -146,6 +147,8 @@ if USE_SUPABASE:
                 "location": "",
                 "default_acl": None,
                 "file_overwrite": False,
+                "addressing_style": "path",
+                "signature_version": "s3v4",
                 "custom_domain": AWS_S3_CUSTOM_DOMAIN if 'AWS_S3_CUSTOM_DOMAIN' in locals() else None,
             },
         },
