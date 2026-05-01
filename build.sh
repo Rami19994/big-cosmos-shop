@@ -1,12 +1,13 @@
 #!/bin/bash
+set -e
 
-# Install dependencies
+echo "--- Installing dependencies ---"
 pip install -r requirements.txt
 
-# Collect static files
+echo "--- Collecting static files ---"
 python manage.py collectstatic --noinput
 
-# Run migrations if database is configured
-if [[ $POSTGRES_DATABASE || $POSTGRES_DB || $POSTGRES_URL ]]; then
-  python manage.py migrate --noinput
-fi
+echo "--- Running database migrations ---"
+python manage.py migrate --noinput
+
+echo "--- Build complete ---"
