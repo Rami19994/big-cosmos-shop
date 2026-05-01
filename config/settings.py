@@ -130,12 +130,14 @@ if USE_SUPABASE:
     # Supabase S3 settings
     AWS_S3_SIGNATURE_VERSION = "s3v4"
     if AWS_S3_ENDPOINT_URL:
-        # Extract project ID from endpoint (e.g. https://xyz.supabase.co/storage/v1/s3)
-        try:
-            project_id = AWS_S3_ENDPOINT_URL.split('//')[1].split('.')[0]
+        # Robust project ID extraction
+        import re
+        match = re.search(r'https?://([^.]+)\.supabase', AWS_S3_ENDPOINT_URL)
+        if match:
+            project_id = match.group(1)
             AWS_S3_CUSTOM_DOMAIN = f"{project_id}.supabase.co/storage/v1/object/public/{AWS_STORAGE_BUCKET_NAME}"
             MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/"
-        except (IndexError, AttributeError):
+        else:
             MEDIA_URL = f"{AWS_S3_ENDPOINT_URL.rstrip('/')}/{AWS_STORAGE_BUCKET_NAME}/"
     else:
         MEDIA_URL = f"https://{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com/"
@@ -144,11 +146,9 @@ if USE_SUPABASE:
         "default": {
             "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
             "OPTIONS": {
-                "location": "",
                 "default_acl": None,
                 "file_overwrite": False,
                 "addressing_style": "path",
-                "signature_version": "s3v4",
                 "custom_domain": AWS_S3_CUSTOM_DOMAIN if 'AWS_S3_CUSTOM_DOMAIN' in locals() else None,
             },
         },
