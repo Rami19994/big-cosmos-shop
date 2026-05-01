@@ -118,7 +118,6 @@ class Product(models.Model):
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="images")
     image = models.ImageField(upload_to="products/", blank=True, null=True)
-    image_url = models.URLField(max_length=500, blank=True, help_text=_("Direct image URL (alternative to upload)"))
     alt_text = models.CharField(max_length=160, blank=True)
     is_main = models.BooleanField(default=False)
     is_360_view = models.BooleanField(default=False)
@@ -132,8 +131,6 @@ class ProductImage(models.Model):
 
     @property
     def url(self):
-        if self.image_url:
-            return self.image_url
         try:
             return self.image.url if self.image else ""
         except (ValueError, AttributeError):

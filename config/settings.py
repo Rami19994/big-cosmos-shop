@@ -141,6 +141,10 @@ else:
         "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
         "staticfiles": {"BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage"},
     }
+    if os.environ.get("VERCEL"):
+        import logging
+        logger = logging.getLogger(__name__)
+        logger.warning("WARNING: Running on Vercel without SUPABASE_BUCKET_NAME. File uploads will NOT be persistent!")
 
 
 
