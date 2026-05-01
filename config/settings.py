@@ -127,20 +127,11 @@ if USE_SUPABASE:
     AWS_DEFAULT_ACL = None
     AWS_QUERYSTRING_AUTH = False
     
-    # Supabase S3 settings
+    # Supabase S3 settings (Using Secure Signed URLs)
     AWS_S3_SIGNATURE_VERSION = "s3v4"
-    if AWS_S3_ENDPOINT_URL:
-        # Robust project ID extraction
-        import re
-        match = re.search(r'https?://([^.]+)\.supabase', AWS_S3_ENDPOINT_URL)
-        if match:
-            project_id = match.group(1)
-            AWS_S3_CUSTOM_DOMAIN = f"{project_id}.supabase.co/storage/v1/object/public/{AWS_STORAGE_BUCKET_NAME}"
-            MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/"
-        else:
-            MEDIA_URL = f"{AWS_S3_ENDPOINT_URL.rstrip('/')}/{AWS_STORAGE_BUCKET_NAME}/"
-    else:
-        MEDIA_URL = f"https://{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com/"
+    AWS_QUERYSTRING_AUTH = True
+    AWS_S3_CUSTOM_DOMAIN = None
+    MEDIA_URL = None # Handled automatically by the storage backend
     
     STORAGES = {
         "default": {
@@ -149,7 +140,6 @@ if USE_SUPABASE:
                 "default_acl": None,
                 "file_overwrite": False,
                 "addressing_style": "path",
-                "custom_domain": AWS_S3_CUSTOM_DOMAIN if 'AWS_S3_CUSTOM_DOMAIN' in locals() else None,
             },
         },
         "staticfiles": {"BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage"},
