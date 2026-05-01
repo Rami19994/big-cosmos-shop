@@ -127,13 +127,28 @@ if USE_SUPABASE:
     AWS_DEFAULT_ACL = None
     AWS_QUERYSTRING_AUTH = False
     
+    # Supabase S3 settings
     if AWS_S3_ENDPOINT_URL:
-        MEDIA_URL = f"{AWS_S3_ENDPOINT_URL.rstrip('/')}/{AWS_STORAGE_BUCKET_NAME}/"
+        # Extract project ID from endpoint (e.g. https://xyz.supabase.co/storage/v1/s3)
+        try:
+            project_id = AWS_S3_ENDPOINT_URL.split('//')[1].split('.')[0]
+            AWS_S3_CUSTOM_DOMAIN = f"{project_id}.supabase.co/storage/v1/object/public/{AWS_STORAGE_BUCKET_NAME}"
+            MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/"
+        except (IndexError, AttributeError):
+            MEDIA_URL = f"{AWS_S3_ENDPOINT_URL.rstrip('/')}/{AWS_STORAGE_BUCKET_NAME}/"
     else:
         MEDIA_URL = f"https://{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com/"
     
     STORAGES = {
-        "default": {"BACKEND": "storages.backends.s3boto3.S3Boto3Storage"},
+        "default": {
+            "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+            "OPTIONS": {
+                "location": "",
+                "default_acl": None,
+                "file_overwrite": False,
+                "custom_domain": AWS_S3_CUSTOM_DOMAIN if 'AWS_S3_CUSTOM_DOMAIN' in locals() else None,
+            },
+        },
         "staticfiles": {"BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage"},
     }
 else:
