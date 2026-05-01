@@ -127,11 +127,15 @@ if USE_SUPABASE:
     AWS_DEFAULT_ACL = None
     AWS_QUERYSTRING_AUTH = False
     
-    # Supabase S3 settings (Using Secure Signed URLs)
+    # Supabase S3 settings
     AWS_S3_SIGNATURE_VERSION = "s3v4"
     AWS_QUERYSTRING_AUTH = True
-    AWS_S3_CUSTOM_DOMAIN = None
-    MEDIA_URL = None # Handled automatically by the storage backend
+    
+    # We use the S3 endpoint as the base for MEDIA_URL if custom domain is not used
+    if AWS_S3_ENDPOINT_URL:
+        MEDIA_URL = f"{AWS_S3_ENDPOINT_URL.rstrip('/')}/{AWS_STORAGE_BUCKET_NAME}/"
+    else:
+        MEDIA_URL = f"https://{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com/"
     
     STORAGES = {
         "default": {
