@@ -108,7 +108,10 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [BASE_DIR / "static"]
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+    BASE_DIR / "media",  # Allow serving media files that are in the repo as static
+]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Media files (Supabase Storage via S3 API)
@@ -124,7 +127,6 @@ if USE_SUPABASE:
     AWS_DEFAULT_ACL = None
     AWS_QUERYSTRING_AUTH = False
     
-    # Ensure endpoint URL is valid and construct MEDIA_URL
     if AWS_S3_ENDPOINT_URL:
         MEDIA_URL = f"{AWS_S3_ENDPOINT_URL.rstrip('/')}/{AWS_STORAGE_BUCKET_NAME}/"
     else:
@@ -135,16 +137,17 @@ if USE_SUPABASE:
         "staticfiles": {"BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage"},
     }
 else:
-    MEDIA_URL = "/media/"
+    # On Vercel, if not using Supabase, we serve media from static assets
+    if os.environ.get("VERCEL"):
+        MEDIA_URL = "/static/"
+    else:
+        MEDIA_URL = "/media/"
+        
     MEDIA_ROOT = BASE_DIR / "media"
     STORAGES = {
         "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
         "staticfiles": {"BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage"},
     }
-    if os.environ.get("VERCEL"):
-        import logging
-        logger = logging.getLogger(__name__)
-        logger.warning("WARNING: Running on Vercel without SUPABASE_BUCKET_NAME. File uploads will NOT be persistent!")
 
 
 
