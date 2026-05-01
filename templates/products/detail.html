@@ -8,7 +8,7 @@
       <div class="product-360-viewer" id="product-360-viewer" style="position: relative; cursor: grab; background: #fff; border-radius: 12px; overflow: hidden; margin-bottom: 2rem; box-shadow: 0 4px 20px rgba(0,0,0,0.08); border: 1px solid #eee;">
         <div id="viewer-360-container" style="display: flex; justify-content: center; align-items: center; min-height: 450px; user-select: none;">
           {% for img in product.images_360 %}
-              <img src="{{ img.image.url }}" class="viewer-360-image" style="max-width: 100%; max-height: 450px; object-fit: contain; display: {% if forloop.first %}block{% else %}none{% endif %};" data-index="{{ forloop.counter0 }}" draggable="false">
+              <img src="{{ img.url }}" class="viewer-360-image" style="max-width: 100%; max-height: 450px; object-fit: contain; display: {% if forloop.first %}block{% else %}none{% endif %};" data-index="{{ forloop.counter0 }}" draggable="false">
             {% endfor %}
           </div>
           <div class="viewer-360-badge" style="position: absolute; top: 1rem; right: 1rem; background: var(--brand, #000); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">360° VIEW</div>
@@ -91,7 +91,8 @@
     <div class="gallery">
       {% for image in product.images.all %}
         {% if not image.is_360_view %}
-          <img src="{{ image.image.url }}" alt="{{ image.alt_text }}">
+          <img src="{{ image.url }}" alt="{{ image.alt_text|default:product.name }}"
+               onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 1 1\'%3E%3Crect width=\'1\' height=\'1\' fill=\'%23eee\'/%3E%3C/svg%3E';">
         {% endif %}
       {% empty %}
         <div class="placeholder xl">{{ product.name|slice:':1' }}</div>

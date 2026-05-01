@@ -1,7 +1,14 @@
 {% load i18n %}
 <article class="product-card">
   <a class="product-media" href="{{ product.get_absolute_url }}">
-    {% with image=product.images.first %}{% if image %}<img src="{{ image.image.url }}" alt="{{ image.alt_text }}">{% else %}<div class="placeholder">{{ product.name|slice:':1' }}</div>{% endif %}{% endwith %}
+    {% with image=product.images.first %}
+      {% if image and image.url %}
+        <img src="{{ image.url }}" alt="{{ image.alt_text|default:product.name }}" 
+             onerror="this.onerror=null; this.parentElement.innerHTML='<div class=&quot;placeholder&quot;>{{ product.name|slice:':1' }}</div>';">
+      {% else %}
+        <div class="placeholder">{{ product.name|slice:':1' }}</div>
+      {% endif %}
+    {% endwith %}
     <div class="badges">{% if product.is_new_arrival %}<span>{% trans 'New' %}</span>{% endif %}{% if product.discount_price %}<span>-{{ product.discount_percent }}%</span>{% endif %}{% if product.is_hot %}<span>{% trans 'Hot' %}</span>{% endif %}</div>
   </a>
   <div class="product-body">
