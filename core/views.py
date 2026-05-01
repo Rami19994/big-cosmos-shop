@@ -77,14 +77,25 @@ def settings(request):
 def run_migrations(request):
     from django.core.management import call_command
     from django.http import HttpResponse
+    from django.conf import settings
+    from products.models import ProductImage
     import io
     
     output = io.StringIO()
+    diagnostic_info = f"<h2>Diagnostics</h2>"
+    diagnostic_info += f"<p><b>MEDIA_URL:</b> {settings.MEDIA_URL}</p>"
+    
+    sample_img = ProductImage.objects.first()
+    if sample_img:
+        diagnostic_info += f"<p><b>Sample Image URL:</b> {sample_img.url}</p>"
+    else:
+        diagnostic_info += "<p><b>Sample Image URL:</b> No images found in database.</p>"
+
     try:
         call_command('migrate', interactive=False, stdout=output)
-        return HttpResponse(f"<h1>Migrations applied successfully</h1><pre>{output.getvalue()}</pre>")
+        return HttpResponse(f"<h1>Migrations applied successfully</h1>{diagnostic_info}<h3>Migration Output:</h3><pre>{output.getvalue()}</pre>")
     except Exception as e:
-        return HttpResponse(f"<h1>Migration failed</h1><pre>{str(e)}</pre>", status=500)
+        return HttpResponse(f"<h1>Migration failed</h1>{diagnostic_info}<h3>Error:</h3><pre>{str(e)}</pre>", status=500)
 
 
 @staff_member_required
