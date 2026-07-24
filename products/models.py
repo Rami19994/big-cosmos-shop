@@ -30,6 +30,14 @@ class Product(models.Model):
         PREORDER = "preorder", _("Pre-order")
 
     category = models.ForeignKey("categories.Category", on_delete=models.PROTECT, related_name="products")
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        related_name="managed_products",
+        blank=True,
+        null=True,
+        help_text=_("The store manager responsible for this product."),
+    )
     brand = models.ForeignKey(Brand, on_delete=models.SET_NULL, related_name="products", blank=True, null=True)
     name_en = models.CharField(max_length=180)
     name_ar = models.CharField(max_length=180, blank=True)

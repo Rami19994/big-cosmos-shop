@@ -1,11 +1,27 @@
 from pathlib import Path
 import os
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+from django.core.exceptions import ImproperlyConfigured
+from dotenv import load_dotenv
 
-SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "dev-only-change-me")
+BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(BASE_DIR / ".env")
+
 DEBUG = os.environ.get("DJANGO_DEBUG", "1") == "1"
-ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1,.vercel.app").split(",")
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
+
+if not SECRET_KEY:
+    if DEBUG:
+        SECRET_KEY = "dev-only-change-me"
+    else:
+        raise ImproperlyConfigured("DJANGO_SECRET_KEY must be set when DJANGO_DEBUG=0.")
+
+_allowed_hosts = os.environ.get("DJANGO_ALLOWED_HOSTS", "")
+if not _allowed_hosts and not DEBUG:
+    raise ImproperlyConfigured("DJANGO_ALLOWED_HOSTS must be set when DJANGO_DEBUG=0.")
+ALLOWED_HOSTS = [host.strip() for host in _allowed_hosts.split(",") if host.strip()]
+if DEBUG:
+    ALLOWED_HOSTS = list(dict.fromkeys(ALLOWED_HOSTS + ["localhost", "127.0.0.1"]))
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -15,6 +31,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "storages",
+    "subscriptions.apps.SubscriptionsConfig",
     "accounts",
     "categories",
     "products",
@@ -113,6 +130,11 @@ STATICFILES_DIRS = [
     BASE_DIR / "media",  # Allow serving media files that are in the repo as static
 ]
 STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_STORAGE_BACKEND = (
+    "django.contrib.staticfiles.storage.StaticFilesStorage"
+    if DEBUG
+    else "whitenoise.storage.CompressedManifestStaticFilesStorage"
+)
 
 # Media files (Supabase Storage via S3 API)
 USE_SUPABASE = os.environ.get("SUPABASE_BUCKET_NAME")
@@ -146,7 +168,7 @@ if USE_SUPABASE:
                 "addressing_style": "path",
             },
         },
-        "staticfiles": {"BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage"},
+        "staticfiles": {"BACKEND": STATICFILES_STORAGE_BACKEND},
     }
 else:
     # On Vercel, if not using Supabase, we serve media from static assets
@@ -158,7 +180,7 @@ else:
     MEDIA_ROOT = BASE_DIR / "media"
     STORAGES = {
         "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
-        "staticfiles": {"BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage"},
+        "staticfiles": {"BACKEND": STATICFILES_STORAGE_BACKEND},
     }
 
 
@@ -179,8 +201,9 @@ X_FRAME_OPTIONS = "DENY"
 SECURE_CONTENT_TYPE_NOSNIFF = True
 SECURE_REFERRER_POLICY = "same-origin"
 
-# Production SSL Settings
-SECURE_SSL_REDIRECT = os.environ.get("DJANGO_SECURE_SSL_REDIRECT", "0") == "1"
+# HTTPS is enabled by default outside local development. Set this environment
+# variable explicitly only when a trusted proxy performs the redirect itself.
+SECURE_SSL_REDIRECT = os.environ.get("DJANGO_SECURE_SSL_REDIRECT", "1" if not DEBUG else "0") == "1"
 if SECURE_SSL_REDIRECT:
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
@@ -190,4 +213,3 @@ if SECURE_SSL_REDIRECT:
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 CSRF_TRUSTED_ORIGINS = [origin for origin in os.environ.get("CSRF_TRUSTED_ORIGINS", "").split(",") if origin]
-

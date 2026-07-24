@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+<section class="subscription-shell"><div class="store-status"><p class="eyebrow">{% trans 'My store' %}</p><h1>{{ store.name }}</h1><p>{% if store.description %}{{ store.description }}{% else %}{% trans 'You have not added a store description yet.' %}{% endif %}</p>{% if subscription %}<div class="status-active">{% blocktrans with plan_name=subscription.plan.display_name end_date=subscription.current_period_end|date:'Y/m/d' %}Your {{ plan_name }} subscription is active until {{ end_date }}{% endblocktrans %}</div><a class="btn" href="/admin/products/product/">{% translate 'Manage store products' context 'subscription store' %}</a>{% else %}<div class="status-pending">{% if latest_subscription %}{% blocktrans with status=latest_subscription.get_status_display %}Subscription status: {{ status }}{% endblocktrans %}{% else %}{% trans 'No active subscription' %}{% endif %}</div><a class="btn" href="{% url 'subscriptions:pricing' %}">{% trans 'Choose a plan' %}</a>{% endif %}</div></section>
+{% endblock %}

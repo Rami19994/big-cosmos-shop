@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView, LogoutView, PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
+from django.views.decorators.http import require_POST
 
 from accounts.forms import AddressForm, ProfileForm, SavedPreferenceForm, UserForm
 from accounts.models import Address, SavedPreference
@@ -42,6 +43,7 @@ def addresses(request):
 
 
 @login_required
+@require_POST
 def delete_address(request, pk):
     get_object_or_404(Address, pk=pk, user=request.user).delete()
     return redirect("accounts:addresses")

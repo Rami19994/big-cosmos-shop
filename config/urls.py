@@ -12,6 +12,7 @@ urlpatterns += i18n_patterns(
     path("admin/", admin.site.urls),
     path("", include("core.urls")),
     path("account/", include("accounts.urls")),
+    path("plans/", include("subscriptions.urls")),
     path("products/", include("products.urls")),
     path("cart/", include("cart.urls")),
     path("orders/", include("orders.urls")),

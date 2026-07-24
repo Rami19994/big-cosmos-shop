@@ -1,7 +1,7 @@
 import csv
 
-from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import user_passes_test
 from django.db.models import Count, Sum
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -12,6 +12,9 @@ from marketing.forms import NewsletterForm
 from marketing.models import Banner, Testimonial
 from orders.models import Order
 from products.models import Product
+
+
+superuser_required = user_passes_test(lambda user: user.is_active and user.is_superuser)
 
 
 def home(request):
@@ -30,7 +33,7 @@ def home(request):
     })
 
 
-@staff_member_required
+@superuser_required
 def dashboard(request):
     orders = Order.objects.all()
     stats = {
@@ -42,38 +45,38 @@ def dashboard(request):
     return render(request, "admin/dashboard.html", {"stats": stats, "recent_orders": orders[:8], "low_stock": Product.objects.filter(stock_quantity__lte=5)[:10], "best_products": Product.objects.filter(is_best_seller=True)[:8]})
 
 
-@staff_member_required
+@superuser_required
 def manage_products(request):
     return render(request, "admin/management.html", {"title": "Product management", "items": Product.objects.select_related("category", "brand")[:100]})
 
 
-@staff_member_required
+@superuser_required
 def manage_orders(request):
     return render(request, "admin/orders.html", {"orders": Order.objects.all()[:100]})
 
 
-@staff_member_required
+@superuser_required
 def manage_customers(request):
     return render(request, "admin/customers.html", {"customers": User.objects.filter(is_staff=False)[:100]})
 
 
-@staff_member_required
+@superuser_required
 def inventory(request):
     return render(request, "admin/inventory.html", {"products": Product.objects.order_by("stock_quantity")[:100]})
 
 
-@staff_member_required
+@superuser_required
 def reports(request):
     return render(request, "admin/reports.html", {"orders_by_status": Order.objects.values("status").annotate(total=Count("id"))})
 
 
-@staff_member_required
+@superuser_required
 def settings(request):
     from core.models import StoreSetting
     return render(request, "admin/settings.html", {"setting": StoreSetting.objects.first()})
 
 
-@staff_member_required
+@superuser_required
 def run_migrations(request):
     from django.core.management import call_command
     from django.http import HttpResponse
@@ -98,7 +101,7 @@ def run_migrations(request):
         return HttpResponse(f"<h1>Migration failed</h1>{diagnostic_info}<h3>Error:</h3><pre>{str(e)}</pre>", status=500)
 
 
-@staff_member_required
+@superuser_required
 def export_orders(request):
     response = HttpResponse(content_type="text/csv")
     response["Content-Disposition"] = 'attachment; filename="orders.csv"'

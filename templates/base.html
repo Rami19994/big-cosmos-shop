@@ -10,6 +10,7 @@
   <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="{% static 'css/storefront.css' %}">
+  <link rel="stylesheet" href="{% static 'css/subscriptions.css' %}">
 </head>
 <body>
   <div class="topbar">{% trans 'Free delivery on selected orders' %} · {% trans 'Secure checkout' %} · {% trans 'Real-time order tracking' %}</div>
@@ -36,9 +37,11 @@
       
       <nav class="nav">
         <a href="{% url 'products:list' %}">{% trans 'Shop' %}</a>
+        <a href="{% url 'subscriptions:pricing' %}">{% translate 'Plans for your store' context 'subscription navigation' %}</a>
         <a href="{% url 'blog:list' %}">{% trans 'Blog' %}</a>
         <a href="{% url 'pages:contact' %}">{% trans 'Contact' %}</a>
         {% if user.is_authenticated %}
+          <a href="{% url 'subscriptions:my_store' %}">{% trans 'My store' %}</a>
           <a href="{% url 'accounts:profile' %}" class="user-link">
             {% if user.profile.avatar %}
               <img src="{{ user.profile.avatar.url }}" alt="{{ user.get_username }}">

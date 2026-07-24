@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+<section class="subscription-shell">
+  <a class="back-link" href="{% url 'subscriptions:pricing' %}">&larr; {% trans 'Back to plans' %}</a>
+  <div class="subscription-layout">
+    <article class="plan-summary"><p class="eyebrow">{% trans 'Selected plan' %}</p><h1>{{ plan.display_name }}</h1><p>{{ plan.display_tagline }}</p><ul>{% for feature in plan.display_features %}<li>&check; {{ feature }}</li>{% endfor %}</ul></article>
+    <form method="post" class="subscription-form">{% csrf_token %}<h2>{% trans 'Create your store' %}</h2>{{ form.as_p }}<fieldset><legend>{% trans 'Billing cycle' %}</legend><label><input type="radio" name="billing_cycle" value="monthly" {% if billing_cycle == 'monthly' %}checked{% endif %}> {% blocktrans with price=plan.monthly_price %}Monthly - ${{ price }}{% endblocktrans %}</label><label><input type="radio" name="billing_cycle" value="annual" {% if billing_cycle == 'annual' %}checked{% endif %}> {% blocktrans with price=plan.annual_price %}Annual - ${{ price }}{% endblocktrans %}</label></fieldset><button class="btn full">{% trans 'Continue to payment' %}</button></form>
+  </div>
+</section>
+{% endblock %}

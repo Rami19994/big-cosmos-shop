@@ -8,7 +8,16 @@ from django.views.decorators.http import require_POST
 from cart.views import get_cart
 from orders.forms import CheckoutForm
 from orders.models import Order
-from orders.services import create_order_from_cart
+from orders.services import InsufficientStock, create_order_from_cart
+
+
+def _can_access_order(request, order):
+    """Allow staff, the owning account, or the guest session that placed an order."""
+    if request.user.is_staff:
+        return True
+    if order.user_id:
+        return request.user.is_authenticated and order.user_id == request.user.id
+    return order.order_number in request.session.get("guest_order_numbers", [])
 
 
 def checkout(request):
@@ -25,7 +34,14 @@ def checkout(request):
             initial.update({"phone": address.phone, "country": address.country, "city": address.city, "region": address.region, "address_line1": address.address_line1, "address_line2": address.address_line2, "postal_code": address.postal_code})
     form = CheckoutForm(request.POST or None, initial=initial)
     if request.method == "POST" and form.is_valid():
-        order = create_order_from_cart(cart, form, request.user)
+        try:
+            order = create_order_from_cart(cart, form, request.user)
+        except InsufficientStock as error:
+            messages.error(request, str(error))
+            return render(request, "checkout/checkout.html", {"cart": cart, "form": form})
+        if not order.user_id:
+            order_numbers = request.session.get("guest_order_numbers", [])
+            request.session["guest_order_numbers"] = (order_numbers + [order.order_number])[-10:]
         messages.success(request, "Order placed successfully.")
         return redirect("orders:confirmation", order_number=order.order_number)
     return render(request, "checkout/checkout.html", {"cart": cart, "form": form})
@@ -33,6 +49,9 @@ def checkout(request):
 
 def confirmation(request, order_number):
     order = get_object_or_404(Order, order_number=order_number)
+    if not _can_access_order(request, order):
+        messages.error(request, "You do not have permission to view this order.")
+        return redirect("core:home")
     return render(request, "orders/confirmation.html", {"order": order})
 
 
@@ -43,7 +62,7 @@ def history(request):
 
 def detail(request, order_number):
     order = get_object_or_404(Order, order_number=order_number)
-    if order.user and order.user != request.user and not request.user.is_staff:
+    if not _can_access_order(request, order):
         messages.error(request, "You do not have permission to view this order.")
         return redirect("core:home")
     return render(request, "orders/detail.html", {"order": order})

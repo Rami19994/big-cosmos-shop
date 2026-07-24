@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Nova Commerce\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-29 22:55+0300\n"
+"POT-Creation-Date: 2026-07-24 13:38+0300\n"
 "Language: en\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -59,7 +59,7 @@ msgstr ""
 msgid "Pickup from store"
 msgstr ""
 
-#: .\orders\models.py:42
+#: .\orders\models.py:42 .\subscriptions\models.py:123
 msgid "Pending"
 msgstr ""
 
@@ -75,7 +75,7 @@ msgstr ""
 msgid "Delivered"
 msgstr ""
 
-#: .\orders\models.py:46
+#: .\orders\models.py:46 .\subscriptions\models.py:91
 msgid "Cancelled"
 msgstr ""
 
@@ -87,11 +87,11 @@ msgstr ""
 msgid "Unpaid"
 msgstr ""
 
-#: .\orders\models.py:51
+#: .\orders\models.py:51 .\subscriptions\models.py:124
 msgid "Paid"
 msgstr ""
 
-#: .\orders\models.py:52
+#: .\orders\models.py:52 .\subscriptions\models.py:125
 msgid "Failed"
 msgstr ""
 
@@ -107,20 +107,70 @@ msgstr ""
 msgid "Pre-order"
 msgstr ""
 
-#: .\products\models.py:48
+#: .\products\models.py:39
+msgid "The store manager responsible for this product."
+msgstr ""
+
+#: .\products\models.py:56
 msgid "Comma-separated tags"
 msgstr ""
 
-#: .\products\models.py:178
+#: .\products\models.py:200
 msgid "Stock in"
 msgstr ""
 
-#: .\products\models.py:179
+#: .\products\models.py:201
 msgid "Stock out"
 msgstr ""
 
-#: .\products\models.py:180
+#: .\products\models.py:202
 msgid "Manual adjustment"
+msgstr ""
+
+#: .\subscriptions\forms.py:11
+msgid "Tell customers about your store"
+msgstr ""
+
+#: .\subscriptions\forms.py:17 .\subscriptions\models.py:118
+msgid "Bank transfer"
+msgstr ""
+
+#: .\subscriptions\forms.py:18
+msgid "Credit card via Stripe"
+msgstr ""
+
+#: .\subscriptions\models.py:84
+msgid "Monthly"
+msgstr ""
+
+#: .\subscriptions\models.py:85
+msgid "Annual"
+msgstr ""
+
+#: .\subscriptions\models.py:88
+msgid "Pending payment"
+msgstr ""
+
+#: .\subscriptions\models.py:89
+msgid "Active"
+msgstr ""
+
+#: .\subscriptions\models.py:90
+msgid "Expired"
+msgstr ""
+
+#: .\subscriptions\views.py:39
+msgid "You do not have permission to access this payment."
+msgstr ""
+
+#: .\subscriptions\views.py:48
+msgid "Awaiting payment-provider confirmation or bank-transfer review."
+msgstr ""
+
+#: .\subscriptions\views.py:50
+msgid ""
+"Your payment request was recorded. Your plan will activate after payment "
+"confirmation."
 msgstr ""
 
 #: .\templates\accounts\addresses.html:1 .\templates\accounts\profile.html:1
@@ -149,7 +199,7 @@ msgid "Welcome back"
 msgstr ""
 
 #: .\templates\accounts\login.html:1
-#: .\templates\accounts\password_reset_complete.html:1 .\templates\base.html:23
+#: .\templates\accounts\password_reset_complete.html:1 .\templates\base.html:54
 msgid "Login"
 msgstr ""
 
@@ -311,7 +361,7 @@ msgstr ""
 
 #: .\templates\admin\orders.html:1 .\templates\cart\detail.html:1
 #: .\templates\checkout\checkout.html:1 .\templates\orders\detail.html:1
-#: .\templates\orders\history.html:1
+#: .\templates\orders\history.html:1 .\templates\subscriptions\payment.html:3
 msgid "Total"
 msgstr ""
 
@@ -345,71 +395,72 @@ msgstr ""
 msgid "Premium e-commerce store for modern brands."
 msgstr ""
 
-#: .\templates\base.html:15
+#: .\templates\base.html:16
 msgid "Free delivery on selected orders"
 msgstr ""
 
-#: .\templates\base.html:15
+#: .\templates\base.html:16
 msgid "Secure checkout"
 msgstr ""
 
-#: .\templates\base.html:15
+#: .\templates\base.html:16
 msgid "Real-time order tracking"
 msgstr ""
 
-#: .\templates\base.html:18
+#: .\templates\base.html:34
 msgid "Search products, brands, categories..."
 msgstr ""
 
-#: .\templates\base.html:18 .\templates\products\list.html:6
+#: .\templates\base.html:35 .\templates\products\list.html:6
 msgid "Search"
 msgstr ""
 
-#: .\templates\base.html:20 .\templates\products\list.html:2
+#: .\templates\base.html:39 .\templates\products\list.html:2
 msgid "Shop"
 msgstr ""
 
-#: .\templates\base.html:21
+#: .\templates\base.html:40
+msgctxt "subscription navigation"
+msgid "Plans for your store"
+msgstr ""
+
+#: .\templates\base.html:41
 msgid "Blog"
 msgstr ""
 
-#: .\templates\base.html:22
+#: .\templates\base.html:42
 msgid "Contact"
 msgstr ""
 
-#: .\templates\base.html:23
-msgid "Account"
+#: .\templates\base.html:44 .\templates\subscriptions\my_store.html:4
+msgid "My store"
 msgstr ""
 
-#: .\templates\base.html:24
+#: .\templates\base.html:56
 msgid "Cart"
 msgstr ""
 
-#: .\templates\base.html:27
-msgid "Theme"
-msgstr ""
-
-#: .\templates\base.html:32
+#: .\templates\base.html:75
 msgid "Commerce platform for ambitious retailers."
 msgstr ""
 
-#: .\templates\base.html:34
+#: .\templates\base.html:77
 msgid "About"
 msgstr ""
 
-#: .\templates\base.html:34
+#: .\templates\base.html:77
 msgid "FAQ"
 msgstr ""
 
-#: .\templates\base.html:34
+#: .\templates\base.html:77
 msgid "Terms"
 msgstr ""
 
-#: .\templates\base.html:34
+#: .\templates\base.html:77
 msgid "Privacy"
 msgstr ""
 
-#: .\templates\base.html:35
+#: .\templates\base.html:78
 msgid "Live chat coming soon"
 msgstr ""
 
@@ -497,83 +548,145 @@ msgstr ""
 msgid "Unable to retrieve your location"
 msgstr ""
 
-#: .\templates\home.html:4
+#: .\templates\home.html:8
 msgid "Premium commerce"
 msgstr ""
 
-#: .\templates\home.html:4
+#: .\templates\home.html:9
 msgid "Products built for the way you live"
 msgstr ""
 
-#: .\templates\home.html:4
+#: .\templates\home.html:25
 msgid "Start shopping"
 msgstr ""
 
-#: .\templates\home.html:4
+#: .\templates\home.html:26
 msgid "Our story"
 msgstr ""
 
-#: .\templates\home.html:5
+#: .\templates\home.html:32
 msgid "Flash offers"
 msgstr ""
 
-#: .\templates\home.html:5
+#: .\templates\home.html:33
 msgid "Curated deals updated daily"
 msgstr ""
 
-#: .\templates\home.html:7
+#: .\templates\home.html:36
+msgid "Explore"
+msgstr ""
+
+#: .\templates\home.html:44
 msgid "Featured categories"
 msgstr ""
 
-#: .\templates\home.html:7
+#: .\templates\home.html:45
 msgid "View all"
 msgstr ""
 
-#: .\templates\home.html:7
-msgid "Add featured categories in the admin dashboard."
-msgstr ""
-
-#: .\templates\home.html:8
+#: .\templates\home.html:62
 msgid "Featured products"
 msgstr ""
 
-#: .\templates\home.html:8
-msgid "Add featured products to populate this section."
+#: .\templates\home.html:63
+msgid "Shop collection"
 msgstr ""
 
-#: .\templates\home.html:9
+#: .\templates\home.html:90 .\templates\home.html:108
 msgid "Best sellers"
 msgstr ""
 
-#: .\templates\home.html:9
+#: .\templates\home.html:91
 msgid "Products customers love most."
 msgstr ""
 
-#: .\templates\home.html:10
+#: .\templates\home.html:94 .\templates\home.html:167
 msgid "New arrivals"
 msgstr ""
 
-#: .\templates\home.html:11
+#: .\templates\home.html:95
+msgid "Freshly added to our store."
+msgstr ""
+
+#: .\templates\home.html:98
+msgid "Flash Sale"
+msgstr ""
+
+#: .\templates\home.html:99
+#, python-format
+msgid "Up to 50%% off select items."
+msgstr ""
+
+#: .\templates\home.html:109
+msgid "Our most popular products, chosen by you."
+msgstr ""
+
+#: .\templates\home.html:122
+msgid "The Future of Shopping"
+msgstr ""
+
+#: .\templates\home.html:123
+msgid "Immersive 3D Experience"
+msgstr ""
+
+#: .\templates\home.html:124
+msgid ""
+"Interact with our products like never before. View them in 360°, zoom in on "
+"details, and see them in your space with AR."
+msgstr ""
+
+#: .\templates\home.html:126
+msgid "Try it now"
+msgstr ""
+
+#: .\templates\home.html:127
+msgid "Learn more"
+msgstr ""
+
+#: .\templates\home.html:136
+msgid "Wall of love"
+msgstr ""
+
+#: .\templates\home.html:137
+msgid "What our customers say"
+msgstr ""
+
+#: .\templates\home.html:168
+msgid "See what\\"
+msgstr ""
+
+#: .\templates\home.html:180
+msgid "Stay updated"
+msgstr ""
+
+#: .\templates\home.html:181
 msgid "Join the insider list"
 msgstr ""
 
-#: .\templates\home.html:11
-msgid "Get offers, launch notes, and shopping inspiration."
+#: .\templates\home.html:182
+msgid ""
+"Get exclusive offers, launch notes, and shopping inspiration delivered to "
+"your inbox."
 msgstr ""
 
-#: .\templates\home.html:11
+#: .\templates\home.html:186
+msgid "your@email.com"
+msgstr ""
+
+#: .\templates\home.html:187
 msgid "Subscribe"
 msgstr ""
 
-#: .\templates\includes\product_card.html:5
+#: .\templates\includes\product_card.html:12
 msgid "New"
 msgstr ""
 
-#: .\templates\includes\product_card.html:5
+#: .\templates\includes\product_card.html:12
 msgid "Hot"
 msgstr ""
 
-#: .\templates\includes\product_card.html:12 .\templates\products\detail.html:8
+#: .\templates\includes\product_card.html:19
+#: .\templates\products\detail.html:104
 msgid "Add to cart"
 msgstr ""
 
@@ -734,51 +847,59 @@ msgstr ""
 msgid "Add products to compare."
 msgstr ""
 
-#: .\templates\products\detail.html:7
+#: .\templates\products\detail.html:18
+msgid "Drag to rotate product"
+msgstr ""
+
+#: .\templates\products\detail.html:103
 msgid "SKU"
 msgstr ""
 
-#: .\templates\products\detail.html:7
+#: .\templates\products\detail.html:103
 msgid "Stock"
 msgstr ""
 
-#: .\templates\products\detail.html:9
+#: .\templates\products\detail.html:105
 msgid "Favorite"
 msgstr ""
 
-#: .\templates\products\detail.html:9
+#: .\templates\products\detail.html:105
 msgid "Compare"
 msgstr ""
 
-#: .\templates\products\detail.html:12
+#: .\templates\products\detail.html:109
 msgid "Details"
 msgstr ""
 
-#: .\templates\products\detail.html:12
+#: .\templates\products\detail.html:116
+msgid "Your browser does not support the video tag."
+msgstr ""
+
+#: .\templates\products\detail.html:123
 msgid "Watch product video"
 msgstr ""
 
-#: .\templates\products\detail.html:13
+#: .\templates\products\detail.html:130
 msgid "Questions and reviews"
 msgstr ""
 
-#: .\templates\products\detail.html:13
+#: .\templates\products\detail.html:130
 msgid "Write a review"
 msgstr ""
 
-#: .\templates\products\detail.html:13
+#: .\templates\products\detail.html:130
 msgid "Submit review"
 msgstr ""
 
-#: .\templates\products\detail.html:13
+#: .\templates\products\detail.html:130
 msgid "Ask a question"
 msgstr ""
 
-#: .\templates\products\detail.html:13
+#: .\templates\products\detail.html:130
 msgid "Ask"
 msgstr ""
 
-#: .\templates\products\detail.html:14
+#: .\templates\products\detail.html:131
 msgid "Related products"
 msgstr ""
 
@@ -844,4 +965,185 @@ msgstr ""
 
 #: .\templates\products\list.html:7
 msgid "Next"
+msgstr ""
+
+#: .\templates\subscriptions\my_store.html:4
+msgid "You have not added a store description yet."
+msgstr ""
+
+#: .\templates\subscriptions\my_store.html:4
+#, python-format
+msgid "Your %(plan_name)s subscription is active until %(end_date)s"
+msgstr ""
+
+#: .\templates\subscriptions\my_store.html:4
+msgctxt "subscription store"
+msgid "Manage store products"
+msgstr ""
+
+#: .\templates\subscriptions\my_store.html:4
+#, python-format
+msgid "Subscription status: %(status)s"
+msgstr ""
+
+#: .\templates\subscriptions\my_store.html:4
+msgid "No active subscription"
+msgstr ""
+
+#: .\templates\subscriptions\my_store.html:4
+msgid "Choose a plan"
+msgstr ""
+
+#: .\templates\subscriptions\payment.html:3
+msgid "Secure payment"
+msgstr ""
+
+#: .\templates\subscriptions\payment.html:3
+#, python-format
+msgid "Complete your %(plan_name)s subscription"
+msgstr ""
+
+#: .\templates\subscriptions\payment.html:3
+#, python-format
+msgid "Reference: %(reference)s"
+msgstr ""
+
+#: .\templates\subscriptions\payment.html:3
+#, python-format
+msgid "Payment status: %(status)s"
+msgstr ""
+
+#: .\templates\subscriptions\payment.html:3
+msgid ""
+"Transfer the amount to the platform account and add this reference to the "
+"transfer description. Your store will activate after review."
+msgstr ""
+
+#: .\templates\subscriptions\payment.html:3
+#, python-format
+msgid ""
+"Your payment request through %(method)s was recorded. Add your gateway keys "
+"to direct customers automatically to payment."
+msgstr ""
+
+#: .\templates\subscriptions\payment.html:3
+msgid "Choose a payment method"
+msgstr ""
+
+#: .\templates\subscriptions\payment.html:3
+msgid "Confirm payment request"
+msgstr ""
+
+#: .\templates\subscriptions\payment.html:3
+msgid ""
+"Bank transfers are reviewed manually. Stripe and PayPal require account keys "
+"before automatic collection can be enabled."
+msgstr ""
+
+#: .\templates\subscriptions\pricing.html:3
+msgid "Store plans"
+msgstr ""
+
+#: .\templates\subscriptions\pricing.html:5
+msgctxt "subscription pricing"
+msgid "Start selling today"
+msgstr ""
+
+#: .\templates\subscriptions\pricing.html:5
+msgid "Simple plans for growing your store"
+msgstr ""
+
+#: .\templates\subscriptions\pricing.html:5
+msgid ""
+"Choose what fits your business stage. Pay monthly or save more with an "
+"annual subscription."
+msgstr ""
+
+#: .\templates\subscriptions\pricing.html:6
+msgid "Popular choice"
+msgstr ""
+
+#: .\templates\subscriptions\pricing.html:6
+msgid "/ month"
+msgstr ""
+
+#: .\templates\subscriptions\pricing.html:6
+#, python-format
+msgid "or $%(price)s annually"
+msgstr ""
+
+#: .\templates\subscriptions\pricing.html:6
+#, python-format
+msgid "Choose %(plan_name)s"
+msgstr ""
+
+#: .\templates\subscriptions\pricing.html:6
+msgid "No plans are available right now."
+msgstr ""
+
+#: .\templates\subscriptions\pricing.html:7
+msgid "How does a subscription work?"
+msgstr ""
+
+#: .\templates\subscriptions\pricing.html:7
+msgid "1. Choose a plan"
+msgstr ""
+
+#: .\templates\subscriptions\pricing.html:7
+msgid "Select the plan and monthly or annual billing cycle."
+msgstr ""
+
+#: .\templates\subscriptions\pricing.html:7
+msgid "2. Create your store"
+msgstr ""
+
+#: .\templates\subscriptions\pricing.html:7
+msgid "Enter your store name and essential details."
+msgstr ""
+
+#: .\templates\subscriptions\pricing.html:7
+msgid "3. Confirm payment"
+msgstr ""
+
+#: .\templates\subscriptions\pricing.html:7
+msgid "Our team activates your store when payment is confirmed."
+msgstr ""
+
+#: .\templates\subscriptions\pricing.html:7
+msgctxt "subscription steps"
+msgid "4. Add store items"
+msgstr ""
+
+#: .\templates\subscriptions\pricing.html:7
+msgid "Access your store dashboard and manage only your own products."
+msgstr ""
+
+#: .\templates\subscriptions\subscribe.html:5
+msgid "Back to plans"
+msgstr ""
+
+#: .\templates\subscriptions\subscribe.html:7
+msgid "Selected plan"
+msgstr ""
+
+#: .\templates\subscriptions\subscribe.html:8
+msgid "Create your store"
+msgstr ""
+
+#: .\templates\subscriptions\subscribe.html:8
+msgid "Billing cycle"
+msgstr ""
+
+#: .\templates\subscriptions\subscribe.html:8
+#, python-format
+msgid "Monthly - $%(price)s"
+msgstr ""
+
+#: .\templates\subscriptions\subscribe.html:8
+#, python-format
+msgid "Annual - $%(price)s"
+msgstr ""
+
+#: .\templates\subscriptions\subscribe.html:8
+msgid "Continue to payment"
 msgstr ""
