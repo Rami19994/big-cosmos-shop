@@ -21,7 +21,7 @@ if not _allowed_hosts and not DEBUG:
     raise ImproperlyConfigured("DJANGO_ALLOWED_HOSTS must be set when DJANGO_DEBUG=0.")
 ALLOWED_HOSTS = [host.strip() for host in _allowed_hosts.split(",") if host.strip()]
 if DEBUG:
-    ALLOWED_HOSTS = list(dict.fromkeys(ALLOWED_HOSTS + ["localhost", "127.0.0.1"]))
+    ALLOWED_HOSTS = list(dict.fromkeys(ALLOWED_HOSTS + ["localhost", "127.0.0.1","big-cosmos-shop.vercel.app"]))
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -161,7 +161,7 @@ if USE_SUPABASE:
     
     STORAGES = {
         "default": {
-            "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+            "BACKEND": "core.storage.ResilientS3Storage",
             "OPTIONS": {
                 "default_acl": None,
                 "file_overwrite": False,
