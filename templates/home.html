@@ -1,192 +1,36 @@
 {% extends 'base.html' %}
-{% load i18n static %}
-
+{% load i18n %}
 {% block content %}
-<!-- Hero Section -->
-<section class="hero">
+<section class="hero hero-refresh">
   <div class="hero-copy">
-    <span class="eyebrow">{% trans 'Premium commerce' %}</span>
+    <span class="eyebrow"><i></i>{% trans 'Premium commerce' %}</span>
     {% trans 'Products built for the way you live' as fallback_hero %}
-    <h1>
-      {% if is_rtl %}
-      {{ store.homepage_title_ar|default:fallback_hero }}
-      {% else %}
-      {{ store.homepage_title_en|default:fallback_hero }}
-      {% endif %}
-    </h1>
-    <p>
-      {% if is_rtl %}
-      {{ store.homepage_subtitle_ar }}
-      {% else %}
-      {{ store.homepage_subtitle_en }}
-      {% endif %}
-    </p>
-    <div class="actions">
-      <a class="btn" href="{% url 'products:list' %}">{% trans 'Start shopping' %}</a>
-      <a class="btn ghost" href="{% url 'pages:about' %}">{% trans 'Our story' %}</a>
-    </div>
+    <h1>{% if is_rtl %}{{ store.homepage_title_ar|default:fallback_hero }}{% else %}{{ store.homepage_title_en|default:fallback_hero }}{% endif %}</h1>
+    <p>{% if is_rtl %}{{ store.homepage_subtitle_ar }}{% else %}{{ store.homepage_subtitle_en }}{% endif %}</p>
+    <div class="actions hero-actions"><a class="btn" href="{% url 'products:list' %}">{% trans 'Start shopping' %}<span>&rarr;</span></a><a class="btn ghost" href="{% url 'pages:about' %}">{% trans 'Our story' %}</a></div>
+    <div class="hero-proof"><span><b>24/7</b>{% trans 'Secure shopping' %}</span><span><b>+</b>{% trans 'Real-time order tracking' %}</span></div>
   </div>
-  <div class="hero-card">
-    <div class="glass">
-      <div>
-        <b>{% trans 'Flash offers' %}</b>
-        <p style="margin: 0; font-size: 0.9rem; opacity: 0.9;">{% trans 'Curated deals updated daily' %}</p>
-      </div>
-      <a href="{% url 'products:list' %}"
-        style="background: white; color: var(--night); padding: 0.5rem 1rem; border-radius: 999px; font-weight: bold; font-size: 0.8rem;">{% trans 'Explore' %}</a>
-    </div>
+  <div class="hero-visual">
+    <div class="orb orb-one"></div><div class="orb orb-two"></div>
+    <div class="hero-product-card"><span>{% trans 'Curated for you' %}</span><strong>{% trans 'Discover your next favorite' %}</strong><a href="{% url 'products:list' %}">{% trans 'Explore' %} &rarr;</a></div>
+    <div class="hero-stat"><b>4.9<span>/5</span></b><small>{% trans 'Customer satisfaction' %}</small></div>
   </div>
 </section>
 
-<!-- Featured Categories -->
-<section class="section">
-  <div class="section-head">
-    <h2>{% trans 'Featured categories' %}</h2>
-    <a href="{% url 'products:list' %}">{% trans 'View all' %} →</a>
-  </div>
-  <div class="category-grid">
-    {% for category in categories %}
-    <a class="category-card" href="{{ category.get_absolute_url }}">
-      <span class="icon">{{ category.icon|default:'◆' }}</span>
-      <h3>{{ category.name }}</h3>
-      <p>{{ category.description|truncatewords:12 }}</p>
-    </a>
-    {% endfor %}
-  </div>
+<section class="section section-refresh">
+  <div class="section-head"><div><span class="eyebrow">{% trans 'Explore' %}</span><h2>{% trans 'Featured categories' %}</h2></div><a class="text-link" href="{% url 'products:list' %}">{% trans 'View all' %} &rarr;</a></div>
+  <div class="category-grid category-grid-refresh">{% for category in categories %}<a class="category-card" href="{{ category.get_absolute_url }}"><span class="category-icon">{{ category.icon|default:'+' }}</span><div><h3>{{ category.name }}</h3><p>{{ category.description|truncatewords:9 }}</p></div><b>&rarr;</b></a>{% endfor %}</div>
 </section>
 
-<!-- Featured Products -->
-{% if featured_products %}
-<section class="section" style="background: var(--surface);">
-  <div class="section-head">
-    <h2>{% trans 'Featured products' %}</h2>
-    <a href="{% url 'products:list' %}">{% trans 'Shop collection' %} →</a>
-  </div>
-  <div class="product-grid">
-    {% for product in featured_products %}
-    {% include 'includes/product_card.html' %}
-    {% endfor %}
-  </div>
-</section>
-{% endif %}
+{% if featured_products %}<section class="section section-refresh featured-surface"><div class="section-head"><div><span class="eyebrow">{% trans 'Handpicked' %}</span><h2>{% trans 'Featured products' %}</h2></div><a class="text-link" href="{% url 'products:list' %}">{% trans 'Shop collection' %} &rarr;</a></div><div class="product-grid">{% for product in featured_products %}{% include 'includes/product_card.html' %}{% endfor %}</div></section>{% endif %}
 
-<!-- Promo Banners -->
-<section class="promo-grid">
-  {% for banner in banners %}
-  <a class="promo" href="{{ banner.link|default:'#' }}"
-    style="background-image: url('{{ banner.image.url }}'); background-size: cover; background-position: center; position: relative; overflow: hidden;">
-    {% if not banner.image %}
-    <div
-      style="position: absolute; inset: 0; background: linear-gradient(135deg, var(--gold), var(--coral)); opacity: 0.1;">
-    </div>
-    {% endif %}
-    <div style="position: relative; z-index: 1;">
-      <h3 style="font-size: 1.8rem; margin-bottom: 0.5rem;">{{ banner.title }}</h3>
-      <p>{{ banner.subtitle }}</p>
-    </div>
-  </a>
-  {% empty %}
-  <div class="promo dark">
-    <h3>{% trans 'Best sellers' %}</h3>
-    <p>{% trans 'Products customers love most.' %}</p>
-  </div>
-  <div class="promo" style="background: var(--line);">
-    <h3>{% trans 'New arrivals' %}</h3>
-    <p>{% trans 'Freshly added to our store.' %}</p>
-  </div>
-  <div class="promo" style="background: var(--gold); color: white;">
-    <h3>{% trans 'Flash Sale' %}</h3>
-    <p>{% trans 'Up to 50% off select items.' %}</p>
-  </div>
-  {% endfor %}
-</section>
+<section class="promo-grid promo-refresh">{% for banner in banners %}<a class="promo" href="{{ banner.link|default:'#' }}"{% if banner.image %} style="background-image:linear-gradient(110deg,rgba(13,20,35,.82),rgba(13,20,35,.14)),url('{{ banner.image.url }}');"{% endif %}><span>{% trans 'Limited collection' %}</span><h3>{{ banner.title }}</h3><p>{{ banner.subtitle }}</p><b>{% trans 'Explore' %} &rarr;</b></a>{% empty %}<a class="promo promo-main" href="{% url 'products:list' %}"><span>{% trans 'Best sellers' %}</span><h3>{% trans 'Products customers love most.' %}</h3><b>{% trans 'Shop collection' %} &rarr;</b></a><a class="promo" href="{% url 'products:list' %}"><span>{% trans 'New arrivals' %}</span><h3>{% trans 'Freshly added to our store.' %}</h3><b>{% trans 'Explore' %} &rarr;</b></a><a class="promo promo-warm" href="{% url 'products:list' %}"><span>{% trans 'Flash Sale' %}</span><h3>{% trans 'Up to 50% off select items.' %}</h3><b>{% trans 'Explore' %} &rarr;</b></a>{% endfor %}</section>
 
-<!-- Best Sellers -->
-{% if best_sellers %}
-<section class="section">
-  <div class="section-head">
-    <h2>{% trans 'Best sellers' %}</h2>
-    <p>{% trans 'Our most popular products, chosen by you.' %}</p>
-  </div>
-  <div class="product-grid">
-    {% for product in best_sellers %}
-    {% include 'includes/product_card.html' %}
-    {% endfor %}
-  </div>
-</section>
-{% endif %}
+{% if best_sellers %}<section class="section section-refresh"><div class="section-head"><div><span class="eyebrow">{% trans 'Most loved' %}</span><h2>{% trans 'Best sellers' %}</h2><p>{% trans 'Our most popular products, chosen by you.' %}</p></div></div><div class="product-grid">{% for product in best_sellers %}{% include 'includes/product_card.html' %}{% endfor %}</div></section>{% endif %}
 
-<!-- 3D Experience Spotlight (Placeholder for premium feel) -->
-<section class="section"
-  style="text-align: center; background: var(--night); color: white; border-radius: 40px; margin: 2rem 6vw; padding: 5rem 2rem;">
-  <span class="eyebrow" style="color: var(--gold);">{% trans 'The Future of Shopping' %}</span>
-  <h2 style="font-size: 3rem; margin: 1rem 0;">{% trans 'Immersive 3D Experience' %}</h2>
-  <p style="max-width: 600px; margin: 0 auto 2rem; opacity: 0.8;">{% trans 'Interact with our products like never before. View them in 360°, zoom in on details, and see them in your space with AR.' %}</p>
-  <div style="display: flex; gap: 1rem; justify-content: center;">
-    <a class="btn" href="{% url 'products:list' %}">{% trans 'Try it now' %}</a>
-    <a class="btn ghost" href="{% url 'pages:about' %}" style="color: white; border-color: rgba(255,255,255,0.3);">{% trans 'Learn more' %}</a>
-  </div>
-</section>
+{% if testimonials %}<section class="section section-refresh review-section"><div class="section-head"><div><span class="eyebrow">{% trans 'Wall of love' %}</span><h2>{% trans 'What our customers say' %}</h2></div></div><div class="review-grid">{% for t in testimonials %}<article class="review-card"><div class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</div><blockquote>“{{ t.quote }}”</blockquote><footer><span>{{ t.name|first }}</span><div><b>{{ t.name }}</b><small>{{ t.role }}</small></div></footer></article>{% endfor %}</div></section>{% endif %}
 
-<!-- Testimonials -->
-{% if testimonials %}
-<section class="section" style="background: radial-gradient(circle at center, rgba(199,149,74,0.05), transparent);">
-  <div class="section-head" style="justify-content: center; text-align: center;">
-    <div>
-      <span class="eyebrow">{% trans 'Wall of love' %}</span>
-      <h2>{% trans 'What our customers say' %}</h2>
-    </div>
-  </div>
-  <div class="grid two" style="gap: 2rem;">
-    {% for t in testimonials %}
-    <div class="panel"
-      style="padding: 2rem; border-radius: 32px; background: var(--surface); box-shadow: var(--shadow);">
-      <div class="rating" style="margin-bottom: 1rem; font-size: 1.2rem;">
-        {% for i in "12345"|make_list %}
-        {% if forloop.counter <= t.rating %}★{% else %}☆{% endif %} {% endfor %} </div>
-          <blockquote style="font-size: 1.25rem; font-style: italic; margin-bottom: 1.5rem; line-height: 1.4;">"{{
-            t.quote }}"</blockquote>
-          <div style="display: flex; align-items: center; gap: 1rem;">
-            <div
-              style="width: 48px; height: 48px; background: var(--line); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--muted);">
-              {{ t.name|first }}</div>
-            <div>
-              <cite style="font-weight: bold; font-style: normal; display: block;">{{ t.name }}</cite>
-              <small style="color: var(--muted);">{{ t.role }}</small>
-            </div>
-          </div>
-      </div>
-      {% endfor %}
-    </div>
-</section>
-{% endif %}
+{% if new_arrivals %}<section class="section section-refresh"><div class="section-head"><div><span class="eyebrow">{% trans 'Just in' %}</span><h2>{% trans 'New arrivals' %}</h2></div><a class="text-link" href="{% url 'products:list' %}">{% trans 'See what\'s new' %} &rarr;</a></div><div class="product-grid">{% for product in new_arrivals %}{% include 'includes/product_card.html' %}{% endfor %}</div></section>{% endif %}
 
-<!-- New Arrivals -->
-<section class="section">
-  <div class="section-head">
-    <h2>{% trans 'New arrivals' %}</h2>
-    <a href="{% url 'products:list' %}">{% trans 'See what\'s new' %} →</a>
-  </div>
-  <div class="product-grid compact">
-    {% for product in new_arrivals %}
-    {% include 'includes/product_card.html' %}
-    {% endfor %}
-  </div>
-</section>
-
-<!-- Newsletter -->
-<section class="newsletter">
-  <div style="max-width: 600px; margin: 0 auto;">
-    <span class="eyebrow" style="color: var(--gold); opacity: 0.8;">{% trans 'Stay updated' %}</span>
-    <h2 style="font-size: 2.5rem; margin: 0.5rem 0;">{% trans 'Join the insider list' %}</h2>
-    <p style="margin-bottom: 2rem; opacity: 0.9;">{% trans 'Get exclusive offers, launch notes, and shopping inspiration delivered to your inbox.' %}</p>
-    <form method="post">
-      {% csrf_token %}
-      <div style="display: flex; gap: 0.5rem; background: rgba(255,255,255,0.1); padding: 0.4rem; border-radius: 999px; border: 1px solid rgba(255,255,255,0.2);">
-        <input type="email" name="email" placeholder="{% trans 'your@email.com' %}" required style="background: transparent; border: none; color: white; padding: 0.8rem 1.5rem; flex: 1; outline: none;">
-        <button class="btn" style="box-shadow: none;">{% trans 'Subscribe' %}</button>
-      </div>
-    </form>
-  </div>
-</section>
+<section class="newsletter newsletter-refresh"><div><span class="eyebrow">{% trans 'Stay updated' %}</span><h2>{% trans 'Join the insider list' %}</h2><p>{% trans 'Get exclusive offers, launch notes, and shopping inspiration delivered to your inbox.' %}</p></div><form method="post">{% csrf_token %}<input type="email" name="email" placeholder="{% trans 'your@email.com' %}" required><button class="btn">{% trans 'Subscribe' %} &rarr;</button></form></section>
 {% endblock %}
